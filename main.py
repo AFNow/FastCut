@@ -1,40 +1,45 @@
 import customtkinter # UI library
-import tkinter
 
+import pytube # YouTube Downloader
 
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 icon_path = os.path.join(BASE_DIR, 'resources/icon.ico')
-#font_path = os.path.join(BASE_DIR, 'font.ttf')
-#theme_path = os.path.join(BASE_DIR, 'theme.json')
+
 
 # Main Window settings
 Fast_Cut = customtkinter.CTk()
+Fast_Cut.resizable(width=False, height=False)
 Fast_Cut.title('FastCut')
-rootHeight = 500
-rootWidth = 1000
+rootHeight = 600
+rootWidth = 1200
 
 # Theme settings
 customtkinter.set_appearance_mode('dark') 
 Fast_Cut.iconbitmap(icon_path)
 
-def show_side_frame():
-    side_frame.configure(relwidth=0.3)
+
+
+
 
 # Background frame settings
-background = customtkinter.CTkFrame(master= Fast_Cut, width= rootWidth, height= rootHeight, fg_color="black")
+background = customtkinter.CTkFrame(master=Fast_Cut, width=rootWidth, height=rootHeight, fg_color="black")
 background.pack(fill='both', expand=True)
 
+# Download bar settings
+download_bar = customtkinter.CTkProgressBar(master=background, width=500, height=20, fg_color="#131324", progress_color='#6558FF')
+download_bar.place(anchor = 'center', relx = 0.5, rely = 0.42)
 
-side_frame = customtkinter.CTkFrame(master= background, width= 300, height= rootHeight, corner_radius=0, fg_color="#131324", border_color='black')
-side_frame.place(x=0, y=0, anchor=tkinter.NW, relx=0.0, rely=0.0, relwidth=0, relheight=1)
+# Link entry settings
+link_entry = customtkinter.CTkEntry(master=background, width=500, height=30, placeholder_text="Enter link", fg_color='#131324')
+link_entry.place(anchor = 'center', relx = 0.5, rely = 0.5)
 
-
-button = customtkinter.CTkButton(master= background, text="button", fg_color="#131324", command= show_side_frame)
-button.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
+# Download button settings
+button = customtkinter.CTkButton(master=background, text="Download", fg_color="#131324", command=None)
+button.place(anchor= 'center', relx = 0.5, rely = 0.6)
 
 # The window and grid settings
-Fast_Cut.geometry(str(rootWidth) + 'x' + str(rootHeight))
+Fast_Cut.geometry(f'{rootWidth}x{rootHeight}')
 Fast_Cut.attributes('-alpha', 1.0)
 
 background.grid_rowconfigure(0, weight=1)
