@@ -1,4 +1,5 @@
-import customtkinter # UI library
+import customtkinter # UI libraries
+from tkinter.filedialog import askdirectory
 
 import pytube # YouTube Downloader
 
@@ -18,9 +19,15 @@ rootWidth = 1200
 customtkinter.set_appearance_mode('dark') 
 Fast_Cut.iconbitmap(icon_path)
 
-
-
-
+def download_button():
+    # currdir = os.getcwd()
+    # print(currdir)
+    save_path = askdirectory(title='Select a place to save')
+    print (save_path)
+    if save_path != "":
+        print('Path is ready')
+    else:
+        print('Path is None')
 
 # Background frame settings
 background = customtkinter.CTkFrame(master=Fast_Cut, width=rootWidth, height=rootHeight, fg_color="black")
@@ -35,7 +42,7 @@ link_entry = customtkinter.CTkEntry(master=background, width=500, height=30, pla
 link_entry.place(anchor = 'center', relx = 0.5, rely = 0.5)
 
 # Download button settings
-button = customtkinter.CTkButton(master=background, text="Download", fg_color="#131324", command=None)
+button = customtkinter.CTkButton(master=background, text="Download", fg_color="#131324", command=download_button)
 button.place(anchor= 'center', relx = 0.5, rely = 0.6)
 
 # The window and grid settings
