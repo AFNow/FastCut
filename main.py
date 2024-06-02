@@ -98,6 +98,7 @@ def download_thread(save_path):
 def video_frame_appear():
     pass
 
+
 # Background frame settings
 background = customtkinter.CTkFrame(master=Fast_Cut, width=rootWidth, height=rootHeight, fg_color="black")
 background.pack(fill='both', expand=True)
