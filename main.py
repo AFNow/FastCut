@@ -47,25 +47,42 @@ def link_check_thread(event):
     return thread
 
 
+# Progress bar function
+def progress_bar(stream, chunk, bytes_remaining):
+    """Callback function"""
+    total_size = stream.filesize
+    bytes_downloaded = total_size - bytes_remaining
+    pct_completed = bytes_downloaded / total_size * 100
+    download_progress_bar.set((round(pct_completed))/100)
+    print(f"Status: {round(pct_completed)} %")
+    link_entry.configure(state='disabled')
+    if pct_completed == 100:
+        video_title_label.configure(text = "Download complete")
+        link_entry.place(anchor = 'center', relx = 0.5, rely = 0.83)
+        link_entry.configure(state='normal')
 # Download function
 def download(save_path):
-        link = link_entry.get()
+        url = link_entry.get()
         link_entry.delete(0, 'end')
-        yt = pytube.YouTube(link, on_progress_callback = None)                     # progress_bar_function
-                            # on_complete_callback=None                            # on_complete_editing_function
-                            # use_oauth=None,                                      # use_oauth=True if you want to use OAuth
-                            # allow_oauth_cache=None                               # allow_oauth_cache=True if you want to use OAuth
+        yt = pytube.YouTube(url, on_progress_callback=progress_bar)
+                            #use_oauth=True,                                      # use_oauth=True if you want to use OAuth
+                            # allow_oauth_cache=None                              # allow_oauth_cache=True if you want to use OAuth
+        out = yt.streams\
+            .filter(progressive=True, file_extension='mp4')\
+            .order_by('resolution')\
+            .desc()\
+            .first()\
+            .download()
         print(yt.title)
-        stream = yt.streams.first()
-        stream.download(save_path)
-        print('Downloaded')
+        print(f"Download complete: {out}")
 # Download button callback
 def download_button():
     global save_path
     if save_path != "":
-        print('Path is ready')
+        #print('Path is ready')
         try:
             download_thread(save_path)
+            link_entry.place_forget()
         except:
             print('Something went wrong')
     else:
@@ -82,8 +99,9 @@ background = customtkinter.CTkFrame(master=Fast_Cut, width=rootWidth, height=roo
 background.pack(fill='both', expand=True)
 
 # Download bar settings
-download_bar = customtkinter.CTkProgressBar(master=background, width=500, height=20, fg_color="#131324", progress_color='#6558FF')
-download_bar.place(anchor = 'center', relx = 0.5, rely = 0.70)
+download_progress_bar = customtkinter.CTkProgressBar(master=background, width=500, height=20, fg_color="#131324", progress_color='#6558FF')
+download_progress_bar.set(0)
+download_progress_bar.place(anchor = 'center', relx = 0.5, rely = 0.83)
 
 # Video Title settings
 video_title_label = customtkinter.CTkLabel(master=background, text='VIDEO TITLE', bg_color="#131324", fg_color="#131324", text_color="#6558FF", font=bold_font, width=500, height=30)
@@ -116,7 +134,7 @@ background.grid_columnconfigure(3, weight=1)
 Fast_Cut.mainloop()
 
 
-# TODO: Add progress bar
-# TODO: Progress Bar need to appear on the link entry, and disable after finishing download
-
+# TODO: Add progress bar --- Done
+# TODO: Progress Bar need to appear on the link entry, and disable after finishing download --- Done
+# TODO: Figure out how to use OAuth in my interface for age restricted videos
 # TODO: Add frame for video, that will apear from the bottom of the window

@@ -9,7 +9,7 @@ def on_progress(stream, chunk, bytes_remaining):
     print(f"Status: {round(pct_completed, 2)} %")
 
 
-url = "https://youtube.com/watch?v=9bZkp7q19f0"
+url = "https://youtu.be/eCWBAX9Ihw0?si=GNrJdf5nu9wgzB0-"
 yt = YouTube(url, on_progress_callback=on_progress)
 
 out = yt.streams\
