@@ -2,7 +2,9 @@ import customtkinter # UI libraries
 
 import pytube # YouTube Downloader
 
-from threading import Thread
+from threading import Thread # Threading
+
+import moviepy # Video processing and editing
 
 import os
 from tkinter.filedialog import askdirectory
@@ -14,6 +16,7 @@ save_path = BASE_DIR
 def set_default_path():
     global save_path
     save_path = askdirectory(title='Select a place to save', initialdir=BASE_DIR)
+    print(save_path)
 
 # Main Window settings
 Fast_Cut = customtkinter.CTk()
@@ -58,7 +61,7 @@ def progress_bar(stream, chunk, bytes_remaining):
     link_entry.configure(state='disabled')
     if pct_completed == 100:
         video_title_label.configure(text = "Download complete")
-        link_entry.place(anchor = 'center', relx = 0.5, rely = 0.83)
+        link_entry.place(anchor = 'center', relx = 0.5, rely = 0.89)
         link_entry.configure(state='normal')
 # Download function
 def download(save_path):
@@ -72,12 +75,11 @@ def download(save_path):
             .order_by('resolution')\
             .desc()\
             .first()\
-            .download()
+            .download(save_path)
         print(yt.title)
         print(f"Download complete: {out}")
 # Download button callback
 def download_button():
-    global save_path
     if save_path != "":
         #print('Path is ready')
         try:
@@ -93,6 +95,8 @@ def download_thread(save_path):
     thread.start()
     return thread
 
+def video_frame_appear():
+    pass
 
 # Background frame settings
 background = customtkinter.CTkFrame(master=Fast_Cut, width=rootWidth, height=rootHeight, fg_color="black")
@@ -101,24 +105,28 @@ background.pack(fill='both', expand=True)
 # Download bar settings
 download_progress_bar = customtkinter.CTkProgressBar(master=background, width=500, height=20, fg_color="#131324", progress_color='#6558FF')
 download_progress_bar.set(0)
-download_progress_bar.place(anchor = 'center', relx = 0.5, rely = 0.83)
+download_progress_bar.place(anchor = 'center', relx = 0.5, rely = 0.89)
 
 # Video Title settings
 video_title_label = customtkinter.CTkLabel(master=background, text='VIDEO TITLE', bg_color="#131324", fg_color="#131324", text_color="#6558FF", font=bold_font, width=500, height=30)
-video_title_label.place(anchor = 'center', relx = 0.5, rely = 0.78)
+video_title_label.place(anchor = 'center', relx = 0.5, rely = 0.83)
 
 # Link entry settings
 link_entry = customtkinter.CTkEntry(master=background, width=500, height=30, placeholder_text="Enter link", fg_color='#131324',)
-link_entry.place(anchor = 'center', relx = 0.5, rely = 0.83)
+link_entry.place(anchor = 'center', relx = 0.5, rely = 0.89)
 link_entry.bind("<KeyRelease>", link_check_thread)
 
 # Path button settings
 path_button = customtkinter.CTkButton(master=background, width=50, text="Path", fg_color="#131324", command=set_default_path)
-path_button.place(anchor= 'center', relx = 0.687, rely = 0.9)
+path_button.place(anchor= 'center', relx = 0.687, rely = 0.95)
 
 # Download button settings
 button = customtkinter.CTkButton(master=background, text="Download", fg_color="#131324", command=download_button)
-button.place(anchor= 'center', relx = 0.35, rely = 0.9)
+button.place(anchor= 'center', relx = 0.35, rely = 0.95)
+
+# Video Player Frame settings
+video_frame = customtkinter.CTkFrame(master=background, width=900, height=460, fg_color="grey3", corner_radius=10)
+video_frame.place(anchor='s', relx = 0.5, rely = 0.79)
 
 # The window and grid settings
 Fast_Cut.geometry(f'{rootWidth}x{rootHeight}')
@@ -136,5 +144,6 @@ Fast_Cut.mainloop()
 
 # TODO: Add progress bar --- Done
 # TODO: Progress Bar need to appear on the link entry, and disable after finishing download --- Done
+
 # TODO: Figure out how to use OAuth in my interface for age restricted videos
 # TODO: Add frame for video, that will apear from the bottom of the window
