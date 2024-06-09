@@ -122,6 +122,25 @@ def video_frame_appearing(): # Later will be with smooth animations
 background = customtkinter.CTkFrame(master=Fast_Cut, width=rootWidth, height=rootHeight, fg_color="black")
 background.pack(fill='both', expand=True)
 
+# Lower frame settings
+lower_frame = customtkinter.CTkFrame(master=background, width=520, height=200, fg_color="black", border_color="#6558FF", border_width=2, corner_radius=20)
+lower_frame.place(anchor = 's', relx = 0.5, rely = 1.1)
+
+def call_lower_frame_func():
+    y_pos = 1.1
+    lower_frame.place(anchor='center', relx = 0.5, rely = y_pos)
+    def lower_frame_animation():
+        nonlocal y_pos
+        while y_pos <= 1.1:
+            y_pos += 0.01
+            print(y_pos)
+            lower_frame.place(anchor='center', relx = 0.5, rely = y_pos)
+            Fast_Cut.after(5000, lower_frame_animation)
+    lower_frame_animation()
+
+call_lower_frame = customtkinter.CTkButton(master=lower_frame, width=480, text="", fg_color="#131324", command=call_lower_frame_func)
+call_lower_frame.place(anchor= 's', relx = 0.5, rely = 0.05)
+
 # Download bar settings
 download_progress_bar = customtkinter.CTkProgressBar(master=background, width=500, height=20, fg_color="#131324", progress_color='#6558FF')
 download_progress_bar.set(0)
@@ -168,4 +187,4 @@ Fast_Cut.mainloop()
 
 # TODO: Figure out how to use OAuth in my interface for age restricted videos
 # TODO: Add frame for video, that will apear from the bottom of the window
-# TODO: Change the interface positions areas, make it more flexible with allowed windos's size option
+# TODO: Change the interface positions areas, make it more flexible with allowed windos's size option https://youtu.be/p7I92IMFa3c?si=PdSvvNBtIwEC7Msz
