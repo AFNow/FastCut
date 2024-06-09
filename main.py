@@ -14,7 +14,9 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 icon_path = os.path.join(BASE_DIR, 'resources/icon.ico')
 font_path = os.path.join(BASE_DIR, 'resources/font.ttf')
 folder_icon_path = os.path.join(BASE_DIR, 'resources/folder_icon.png')
+download_icon_path = os.path.join(BASE_DIR, 'resources/download_icon.png')
 save_path = BASE_DIR
+
 # Default path settings
 def set_default_path():
     global save_path
@@ -140,8 +142,9 @@ path_button = customtkinter.CTkButton(master=background, width=30, text="", fg_c
 path_button.place(anchor= 'e', relx = 0.71, rely = 0.95)
 
 # Download button settings
-button = customtkinter.CTkButton(master=background, text="Download", fg_color="#131324", command=download_button)
-button.place(anchor= 'center', relx = 0.35, rely = 0.95)
+download_button_image = customtkinter.CTkImage(Image.open(download_icon_path), size=(20, 20))
+download_button = customtkinter.CTkButton(master=background, width=30, text="", fg_color="#131324", command=download_button, image=download_button_image)
+download_button.place(anchor= 'w', relx = 0.29, rely = 0.95)
 
 # Video Player Frame settings
 video_frame = customtkinter.CTkFrame(master=background, width=900, height=460, fg_color="grey3", corner_radius=10)
