@@ -6,11 +6,14 @@ from threading import Thread # Threading
 
 import moviepy # Video processing and editing
 
+from PIL import Image, ImageTk # Pillow libraries
+
 import os
 from tkinter.filedialog import askdirectory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 icon_path = os.path.join(BASE_DIR, 'resources/icon.ico')
 font_path = os.path.join(BASE_DIR, 'resources/font.ttf')
+folder_icon_path = os.path.join(BASE_DIR, 'resources/folder_icon.png')
 save_path = BASE_DIR
 # Default path settings
 def set_default_path():
@@ -20,7 +23,7 @@ def set_default_path():
 
 # Main Window settings
 Fast_Cut = customtkinter.CTk()
-Fast_Cut.resizable(width=False, height=False)
+Fast_Cut.resizable(width=True, height=True)
 Fast_Cut.title('FastCut')
 rootHeight = 600
 rootWidth = 1200
@@ -63,6 +66,9 @@ def progress_bar(stream, chunk, bytes_remaining):
         video_title_label.configure(text = "Download complete")
         link_entry.place(anchor = 'center', relx = 0.5, rely = 0.89)
         link_entry.configure(state='normal')
+        video_frame_appearing()
+        download_progress_bar.set(0)
+        download_progress_bar.place(anchor = 'center', relx = 0.5, rely = 0.89)  
 # Download function
 def download(save_path):
         url = link_entry.get()
@@ -95,8 +101,19 @@ def download_thread(save_path):
     thread.start()
     return thread
 
-def video_frame_appear():
-    pass
+
+# Animation for video player frame
+def video_frame_appearing(): # Later will be with smooth animations
+    y_pos = 2
+    video_frame.place(anchor='center', relx = 0.5, rely = y_pos)
+    def video_frame_animation():
+        nonlocal y_pos
+        while y_pos >= 0.4:
+            y_pos -= 0.01
+            print(y_pos)
+            video_frame.place(anchor='center', relx = 0.5, rely = y_pos)
+            Fast_Cut.after(5000, video_frame_animation)
+    video_frame_animation()
 
 
 # Background frame settings
@@ -118,8 +135,9 @@ link_entry.place(anchor = 'center', relx = 0.5, rely = 0.89)
 link_entry.bind("<KeyRelease>", link_check_thread)
 
 # Path button settings
-path_button = customtkinter.CTkButton(master=background, width=50, text="Path", fg_color="#131324", command=set_default_path)
-path_button.place(anchor= 'center', relx = 0.687, rely = 0.95)
+path_button_image = customtkinter.CTkImage(Image.open(folder_icon_path), size=(20, 20))
+path_button = customtkinter.CTkButton(master=background, width=30, text="", fg_color="#131324", command=set_default_path, image=path_button_image)
+path_button.place(anchor= 'e', relx = 0.71, rely = 0.95)
 
 # Download button settings
 button = customtkinter.CTkButton(master=background, text="Download", fg_color="#131324", command=download_button)
@@ -127,7 +145,6 @@ button.place(anchor= 'center', relx = 0.35, rely = 0.95)
 
 # Video Player Frame settings
 video_frame = customtkinter.CTkFrame(master=background, width=900, height=460, fg_color="grey3", corner_radius=10)
-video_frame.place(anchor='s', relx = 0.5, rely = 0.79)
 
 # The window and grid settings
 Fast_Cut.geometry(f'{rootWidth}x{rootHeight}')
@@ -148,3 +165,4 @@ Fast_Cut.mainloop()
 
 # TODO: Figure out how to use OAuth in my interface for age restricted videos
 # TODO: Add frame for video, that will apear from the bottom of the window
+# TODO: Change the interface positions areas, make it more flexible with allowed windos's size option
