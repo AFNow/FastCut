@@ -29,7 +29,8 @@ Fast_Cut.resizable(width=True, height=True)
 Fast_Cut.title('FastCut')
 rootHeight = 600
 rootWidth = 1200
-
+Fast_Cut.minsize(rootWidth, rootHeight)
+Fast_Cut.maxsize(rootWidth+200, rootHeight+200)
 
 # Theme settings
 customtkinter.set_appearance_mode('dark') 
@@ -123,23 +124,22 @@ background = customtkinter.CTkFrame(master=Fast_Cut, width=rootWidth, height=roo
 background.pack(fill='both', expand=True)
 
 # Lower frame settings
-lower_frame = customtkinter.CTkFrame(master=background, width=520, height=200, fg_color="black", border_color="#6558FF", border_width=2, corner_radius=20)
-lower_frame.place(anchor = 's', relx = 0.5, rely = 1.1)
+lower_frame = customtkinter.CTkFrame(master=background, width=520, height=300, fg_color="black", border_color="#6558FF", border_width=2)
+lower_frame.place(relx=0.5, rely=0.99, anchor='n')
 
 def call_lower_frame_func():
-    y_pos = 1.1
-    lower_frame.place(anchor='center', relx = 0.5, rely = y_pos)
+    y_position = 0.99
     def lower_frame_animation():
-        nonlocal y_pos
-        while y_pos <= 1.1:
-            y_pos += 0.01
-            print(y_pos)
-            lower_frame.place(anchor='center', relx = 0.5, rely = y_pos)
+        nonlocal y_position
+        while y_position >= 0.76:
+            y_position -= 0.01
+            print(y_position)
+            lower_frame.place(anchor='n', relx = 0.5, rely = y_position)
             Fast_Cut.after(5000, lower_frame_animation)
     lower_frame_animation()
 
-call_lower_frame = customtkinter.CTkButton(master=lower_frame, width=480, text="", fg_color="#131324", command=call_lower_frame_func)
-call_lower_frame.place(anchor= 's', relx = 0.5, rely = 0.05)
+call_lower_frame_button = customtkinter.CTkButton(master=lower_frame, width=520, height=25, text="", fg_color="#131324", command=call_lower_frame_func)
+call_lower_frame_button.place(anchor= 'n', relx = 0.5, rely = 0)
 
 # Download bar settings
 download_progress_bar = customtkinter.CTkProgressBar(master=background, width=500, height=20, fg_color="#131324", progress_color='#6558FF')
@@ -172,11 +172,8 @@ video_frame = customtkinter.CTkFrame(master=background, width=900, height=460, f
 Fast_Cut.geometry(f'{rootWidth}x{rootHeight}')
 Fast_Cut.attributes('-alpha', 1.0)
 
-background.grid_rowconfigure(0, weight=1)
-background.grid_columnconfigure(0, weight=1)
-background.grid_columnconfigure(1, weight=1)
-background.grid_columnconfigure(2, weight=1)
-background.grid_columnconfigure(3, weight=1)
+background.grid_rowconfigure((0, 1, 2, 3, 4), weight=1)
+background.grid_columnconfigure((0, 1, 2, 3, 4), weight=1)
 
 # Mainloop start
 Fast_Cut.mainloop()
