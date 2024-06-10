@@ -125,45 +125,46 @@ background.pack(fill='both', expand=True)
 
 # Lower frame settings
 lower_frame = customtkinter.CTkFrame(master=background, width=520, height=300, fg_color="black", border_color="#6558FF", border_width=2)
-lower_frame.place(relx=0.5, rely=0.99, anchor='n')
+lower_frame.place(relx=0.5, rely=0.98, anchor='n')
 
 def call_lower_frame_func():
-    y_position = 0.99
+    y_position = 0.98
     def lower_frame_animation():
         nonlocal y_position
-        while y_position >= 0.76:
-            y_position -= 0.01
+        if y_position >= -120:
+            y_position -= 10
             print(y_position)
-            lower_frame.place(anchor='n', relx = 0.5, rely = y_position)
-            Fast_Cut.after(5000, lower_frame_animation)
+            lower_frame.place(anchor='n', relx = 0.5, y = y_position)
+            Fast_Cut.after(10, lambda: lower_frame_animation())
+
     lower_frame_animation()
 
 call_lower_frame_button = customtkinter.CTkButton(master=lower_frame, width=520, height=25, text="", fg_color="#131324", command=call_lower_frame_func)
 call_lower_frame_button.place(anchor= 'n', relx = 0.5, rely = 0)
 
 # Download bar settings
-download_progress_bar = customtkinter.CTkProgressBar(master=background, width=500, height=20, fg_color="#131324", progress_color='#6558FF')
+download_progress_bar = customtkinter.CTkProgressBar(master=lower_frame, width=500, height=20, fg_color="#131324", progress_color='#6558FF')
 download_progress_bar.set(0)
-download_progress_bar.place(anchor = 'center', relx = 0.5, rely = 0.89)
+download_progress_bar.place(anchor = 'center', relx = 0.5, rely = 0.27)
 
 # Video Title settings
-video_title_label = customtkinter.CTkLabel(master=background, text='VIDEO TITLE', bg_color="#131324", fg_color="#131324", text_color="#6558FF", font=bold_font, width=500, height=30)
-video_title_label.place(anchor = 'center', relx = 0.5, rely = 0.83)
+video_title_label = customtkinter.CTkLabel(master=lower_frame, text='VIDEO TITLE', bg_color="#131324", fg_color="#131324", text_color="#6558FF", font=bold_font, width=500, height=30)
+video_title_label.place(anchor = 'center', relx = 0.5, rely = 0.15)
 
 # Link entry settings
-link_entry = customtkinter.CTkEntry(master=background, width=500, height=30, placeholder_text="Enter link", fg_color='#131324',)
-link_entry.place(anchor = 'center', relx = 0.5, rely = 0.89)
+link_entry = customtkinter.CTkEntry(master=lower_frame, width=500, height=30, placeholder_text="Enter link", fg_color='#131324',)
+link_entry.place(anchor = 'center', relx = 0.5, rely = 0.27)
 link_entry.bind("<KeyRelease>", link_check_thread)
 
 # Path button settings
 path_button_image = customtkinter.CTkImage(Image.open(folder_icon_path), size=(20, 20))
-path_button = customtkinter.CTkButton(master=background, width=30, text="", fg_color="#131324", command=set_default_path, image=path_button_image)
-path_button.place(anchor= 'e', relx = 0.71, rely = 0.95)
+path_button = customtkinter.CTkButton(master=lower_frame, width=30, text="", fg_color="#131324", command=set_default_path, image=path_button_image)
+path_button.place(anchor= 'e', relx = 0.98, rely = 0.4)
 
 # Download button settings
 download_button_image = customtkinter.CTkImage(Image.open(download_icon_path), size=(20, 20))
-download_button = customtkinter.CTkButton(master=background, width=30, text="", fg_color="#131324", command=download_button, image=download_button_image)
-download_button.place(anchor= 'w', relx = 0.29, rely = 0.95)
+download_button = customtkinter.CTkButton(master=lower_frame, width=30, text="", fg_color="#131324", command=download_button, image=download_button_image)
+download_button.place(anchor= 'w', relx = 0.02, rely = 0.4)
 
 # Video Player Frame settings
 video_frame = customtkinter.CTkFrame(master=background, width=900, height=460, fg_color="grey3", corner_radius=10)
