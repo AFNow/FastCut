@@ -30,7 +30,7 @@ Fast_Cut.title('FastCut')
 rootHeight = 600
 rootWidth = 1200
 Fast_Cut.minsize(rootWidth, rootHeight)
-Fast_Cut.maxsize(rootWidth+200, rootHeight+200)
+#Fast_Cut.maxsize(rootWidth+200, rootHeight+200)
 
 # Theme settings
 customtkinter.set_appearance_mode('dark') 
@@ -107,6 +107,7 @@ def download_thread(save_path):
 
 # Animation for video player frame
 def video_frame_appearing(): # Later will be with smooth animations
+    
     y_pos = 2
     video_frame.place(anchor='center', relx = 0.5, rely = y_pos)
     def video_frame_animation():
@@ -128,19 +129,36 @@ lower_frame = customtkinter.CTkFrame(master=background, width=520, height=300, f
 lower_frame.place(relx=0.5, rely=0.98, anchor='n')
 
 def call_lower_frame_func():
-    y_position = 0.98
-    def lower_frame_animation():
+    y_position = 0
+    def lower_frame_call_animation():
         nonlocal y_position
         if y_position >= -120:
             y_position -= 10
-            print(y_position)
             lower_frame.place(anchor='n', relx = 0.5, y = y_position)
-            Fast_Cut.after(10, lambda: lower_frame_animation())
+            Fast_Cut.after(10, lambda: lower_frame_call_animation())
+            if y_position <= -120:
+                hide_lower_frame_button.place(anchor= 'n', relx = 0.5, rely = 0)     
+    lower_frame_call_animation()
 
-    lower_frame_animation()
+def new_btn():
+    y_position = -130
+    def lower_frame_hide_animation():
+        nonlocal y_position
+        if y_position <= -10:
+            y_position += 10
+            lower_frame.place(anchor='n', relx = 0.5, y = y_position)
+            Fast_Cut.after(10, lambda: lower_frame_hide_animation())
+            if y_position >= 0:
+                hide_lower_frame_button.place_forget()
+                call_lower_frame_button.place(anchor= 'n', relx = 0.5, rely = 0)
+    lower_frame_hide_animation()
+            
+        
 
 call_lower_frame_button = customtkinter.CTkButton(master=lower_frame, width=520, height=25, text="", fg_color="#131324", command=call_lower_frame_func)
 call_lower_frame_button.place(anchor= 'n', relx = 0.5, rely = 0)
+
+hide_lower_frame_button = customtkinter.CTkButton(master=lower_frame, width=520, height=25, text="", fg_color="#131324", command=new_btn)
 
 # Download bar settings
 download_progress_bar = customtkinter.CTkProgressBar(master=lower_frame, width=500, height=20, fg_color="#131324", progress_color='#6558FF')
