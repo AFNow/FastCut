@@ -69,7 +69,7 @@ def progress_bar(stream, chunk, bytes_remaining):
         video_title_label.configure(text = "Download complete")
         link_entry.place(anchor = 'center', relx = 0.5, rely = 0.89)
         link_entry.configure(state='normal')
-        video_frame_appearing()
+        video_frame_call()
         download_progress_bar.set(0)
         download_progress_bar.place(anchor = 'center', relx = 0.5, rely = 0.89)  
 # Download function
@@ -105,19 +105,19 @@ def download_thread(save_path):
     return thread
 
 
-# Animation for video player frame
-def video_frame_appearing(): # Later will be with smooth animations
     
-    y_pos = 2
-    video_frame.place(anchor='center', relx = 0.5, rely = y_pos)
-    def video_frame_animation():
-        nonlocal y_pos
-        while y_pos >= 0.4:
-            y_pos -= 0.01
-            print(y_pos)
-            video_frame.place(anchor='center', relx = 0.5, rely = y_pos)
-            Fast_Cut.after(5000, video_frame_animation)
-    video_frame_animation()
+def video_frame_call():
+    y_position = 300
+    video_frame.grid(column=1, row=1, columnspan=3, rowspan=2, sticky='nswe', ipady= 30)
+    #video_frame.place(anchor='center', relx = 0.5, y = y_position)
+    #def video_frame_animation():
+    #    nonlocal y_position
+    #    if y_position >= 0.4:
+    #        y_position -= 0.1
+    #        video_frame.place(anchor='n', relx = 0.5, y = y_position)
+    #        Fast_Cut.after(10, lambda: video_frame_animation())     
+    #video_frame_animation()
+
 
 
 # Background frame settings
@@ -140,7 +140,7 @@ def call_lower_frame_func():
                 hide_lower_frame_button.place(anchor= 'n', relx = 0.5, rely = 0)     
     lower_frame_call_animation()
 
-def new_btn():
+def hide_lower_frame_func():
     y_position = -130
     def lower_frame_hide_animation():
         nonlocal y_position
@@ -158,7 +158,7 @@ def new_btn():
 call_lower_frame_button = customtkinter.CTkButton(master=lower_frame, width=520, height=25, text="", fg_color="#131324", command=call_lower_frame_func)
 call_lower_frame_button.place(anchor= 'n', relx = 0.5, rely = 0)
 
-hide_lower_frame_button = customtkinter.CTkButton(master=lower_frame, width=520, height=25, text="", fg_color="#131324", command=new_btn)
+hide_lower_frame_button = customtkinter.CTkButton(master=lower_frame, width=520, height=25, text="", fg_color="#131324", command=hide_lower_frame_func)
 
 # Download bar settings
 download_progress_bar = customtkinter.CTkProgressBar(master=lower_frame, width=500, height=20, fg_color="#131324", progress_color='#6558FF')
@@ -183,6 +183,9 @@ path_button.place(anchor= 'e', relx = 0.98, rely = 0.4)
 download_button_image = customtkinter.CTkImage(Image.open(download_icon_path), size=(20, 20))
 download_button = customtkinter.CTkButton(master=lower_frame, width=30, text="", fg_color="#131324", command=download_button, image=download_button_image)
 download_button.place(anchor= 'w', relx = 0.02, rely = 0.4)
+
+show_player_debug = customtkinter.CTkButton(master=background, width=30, text="", fg_color="#131324", command=video_frame_call)
+show_player_debug.place(anchor= 'w', relx = 0.02, rely = 0.2)
 
 # Video Player Frame settings
 video_frame = customtkinter.CTkFrame(master=background, width=900, height=460, fg_color="grey3", corner_radius=10)
