@@ -27,10 +27,10 @@ def set_default_path():
 Fast_Cut = customtkinter.CTk()
 Fast_Cut.resizable(width=True, height=True)
 Fast_Cut.title('FastCut')
-rootHeight = 600
-rootWidth = 1200
+rootHeight = 900
+rootWidth = 1500
 Fast_Cut.minsize(rootWidth, rootHeight)
-#Fast_Cut.maxsize(rootWidth+200, rootHeight+200)
+Fast_Cut.maxsize(1920, 1080)
 
 # Theme settings
 customtkinter.set_appearance_mode('dark') 
@@ -108,7 +108,7 @@ def download_thread(save_path):
     
 def video_frame_call():
     y_position = 300
-    video_frame.grid(column=1, row=1, columnspan=3, rowspan=2, sticky='nswe', ipady= 30)
+    video_frame.grid(column=1, row=0, columnspan=3, rowspan=2, sticky='nswe', ipady= 20)
     #video_frame.place(anchor='center', relx = 0.5, y = y_position)
     #def video_frame_animation():
     #    nonlocal y_position
@@ -153,11 +153,12 @@ def hide_lower_frame_func():
                 call_lower_frame_button.place(anchor= 'n', relx = 0.5, rely = 0)
     lower_frame_hide_animation()
             
-        
+# Video Player Frame settings
+video_frame = customtkinter.CTkFrame(master=background, width=900, height=600, fg_color="grey3", corner_radius=10)                  
 
+# Lower frame buttons
 call_lower_frame_button = customtkinter.CTkButton(master=lower_frame, width=520, height=25, text="", fg_color="#131324", command=call_lower_frame_func)
 call_lower_frame_button.place(anchor= 'n', relx = 0.5, rely = 0)
-
 hide_lower_frame_button = customtkinter.CTkButton(master=lower_frame, width=520, height=25, text="", fg_color="#131324", command=hide_lower_frame_func)
 
 # Download bar settings
@@ -187,8 +188,6 @@ download_button.place(anchor= 'w', relx = 0.02, rely = 0.4)
 show_player_debug = customtkinter.CTkButton(master=background, width=30, text="", fg_color="#131324", command=video_frame_call)
 show_player_debug.place(anchor= 'w', relx = 0.02, rely = 0.2)
 
-# Video Player Frame settings
-video_frame = customtkinter.CTkFrame(master=background, width=900, height=460, fg_color="grey3", corner_radius=10)
 
 # The window and grid settings
 Fast_Cut.geometry(f'{rootWidth}x{rootHeight}')

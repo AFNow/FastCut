@@ -1,22 +1,49 @@
-from pytube import YouTube
+import tkinter
+import tkinter.filedialog as filedialog
+from moviepy.editor import VideoFileClip
+from PIL import Image, ImageTk
 
+class VideoPlayer:
+    def __init__(self):
+        self.clip = None
 
-def on_progress(stream, chunk, bytes_remaining):
-    """Callback function"""
-    total_size = stream.filesize
-    bytes_downloaded = total_size - bytes_remaining
-    pct_completed = bytes_downloaded / total_size * 100
-    print(f"Status: {round(pct_completed, 2)} %")
+        self.root = tkinter.Tk()
+        self.canvas = tkinter.Canvas(self.root)
+        self.canvas.pack()
 
+        self.menu = tkinter.Menu(self.root)
+        self.root.config(menu=self.menu)
+        self.file_menu = tkinter.Menu(self.menu)
+        self.menu.add_cascade(label="File", menu=self.file_menu)
+        self.file_menu.add_command(label="Open Video", command=self.open_video)
 
-url = "https://youtu.be/eCWBAX9Ihw0?si=GNrJdf5nu9wgzB0-"
-yt = YouTube(url, on_progress_callback=on_progress)
+    def open_video(self):
+        file_path = filedialog.askopenfilename(filetypes=[("Video Files", "*.mp4;*.avi;*.mkv")])
+        if file_path:
+            if self.clip:
+                self.clip.reader.close()
+            self.clip = VideoFileClip(file_path)
+            self.canvas.config(width=self.clip.size[0],
+                height=self.clip.size[1])
 
-out = yt.streams\
-    .filter(progressive=True, file_extension='mp4')\
-    .order_by('resolution')\
-    .desc()\
-    .first()\
-    .download()
+    def play(self):
+        if self.clip:
+            try:
+                frame = self.clip.get_frame(self.clip.duration * self.canvas.coords(self.img)[0] / self.canvas.winfo_width())
+            except:
+                self.clip.reader.close()
+                self.clip = None
+                return
+            im = Image.fromarray(frame)
+            self.photo = ImageTk.PhotoImage(im)
+            self.canvas.itemconfig(self.img, image=self.photo)
+        self.root.after(30, self.play)
 
-print(f"Download complete: {out}")
+    def run(self):
+        if self.clip:
+            self.img = self.canvas.create_image(0, 0, anchor=tkinter.NW)
+        self.play()
+        self.root.mainloop()
+
+player = VideoPlayer()
+player.run()
