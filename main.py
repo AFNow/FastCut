@@ -4,6 +4,8 @@ import pytube # YouTube Downloader
 
 from threading import Thread # Threading
 
+from tkVideoPlayer import TkinterVideo # Video Player
+
 import moviepy # Video processing and editing
 
 from PIL import Image, ImageTk # Pillow libraries

@@ -1,49 +1,119 @@
-import tkinter
-import tkinter.filedialog as filedialog
-from moviepy.editor import VideoFileClip
-from PIL import Image, ImageTk
+# Author Paul
 
-class VideoPlayer:
-    def __init__(self):
-        self.clip = None
+# MIT License
+#
+# Copyright (c) 2021 Paul
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 
-        self.root = tkinter.Tk()
-        self.canvas = tkinter.Canvas(self.root)
-        self.canvas.pack()
 
-        self.menu = tkinter.Menu(self.root)
-        self.root.config(menu=self.menu)
-        self.file_menu = tkinter.Menu(self.menu)
-        self.menu.add_cascade(label="File", menu=self.file_menu)
-        self.file_menu.add_command(label="Open Video", command=self.open_video)
+import datetime
+import tkinter as tk
+from tkinter import filedialog
+from tkVideoPlayer import TkinterVideo
 
-    def open_video(self):
-        file_path = filedialog.askopenfilename(filetypes=[("Video Files", "*.mp4;*.avi;*.mkv")])
-        if file_path:
-            if self.clip:
-                self.clip.reader.close()
-            self.clip = VideoFileClip(file_path)
-            self.canvas.config(width=self.clip.size[0],
-                height=self.clip.size[1])
 
-    def play(self):
-        if self.clip:
-            try:
-                frame = self.clip.get_frame(self.clip.duration * self.canvas.coords(self.img)[0] / self.canvas.winfo_width())
-            except:
-                self.clip.reader.close()
-                self.clip = None
-                return
-            im = Image.fromarray(frame)
-            self.photo = ImageTk.PhotoImage(im)
-            self.canvas.itemconfig(self.img, image=self.photo)
-        self.root.after(30, self.play)
+def update_duration(event):
+    """ updates the duration after finding the duration """
+    duration = vid_player.video_info()["duration"]
+    end_time["text"] = str(datetime.timedelta(seconds=duration))
+    progress_slider["to"] = duration
 
-    def run(self):
-        if self.clip:
-            self.img = self.canvas.create_image(0, 0, anchor=tkinter.NW)
-        self.play()
-        self.root.mainloop()
 
-player = VideoPlayer()
-player.run()
+def update_scale(event):
+    """ updates the scale value """
+    progress_value.set(vid_player.current_duration())
+
+
+def load_video():
+    """ loads the video """
+    file_path = filedialog.askopenfilename()
+
+    if file_path:
+        vid_player.load(file_path)
+
+        progress_slider.config(to=0, from_=0)
+        play_pause_btn["text"] = "Play"
+        progress_value.set(0)
+
+
+def seek(value):
+    """ used to seek a specific timeframe """
+    vid_player.seek(int(value))
+
+
+def skip(value: int):
+    """ skip seconds """
+    vid_player.seek(int(progress_slider.get())+value)
+    progress_value.set(progress_slider.get() + value)
+
+
+def play_pause():
+    """ pauses and plays """
+    if vid_player.is_paused():
+        vid_player.play()
+        play_pause_btn["text"] = "Pause"
+
+    else:
+        vid_player.pause()
+        play_pause_btn["text"] = "Play"
+
+
+def video_ended(event):
+    """ handle video ended """
+    progress_slider.set(progress_slider["to"])
+    play_pause_btn["text"] = "Play"
+    progress_slider.set(0)
+
+
+root = tk.Tk()
+root.title("Tkinter media")
+
+load_btn = tk.Button(root, text="Load", command=load_video)
+load_btn.pack()
+
+vid_player = TkinterVideo(scaled=True, master=root)
+vid_player.pack(expand=True, fill="both")
+
+play_pause_btn = tk.Button(root, text="Play", command=play_pause)
+play_pause_btn.pack()
+
+skip_plus_5sec = tk.Button(root, text="Skip -5 sec", command=lambda: skip(-5))
+skip_plus_5sec.pack(side="left")
+
+start_time = tk.Label(root, text=str(datetime.timedelta(seconds=0)))
+start_time.pack(side="left")
+
+progress_value = tk.IntVar(root)
+
+progress_slider = tk.Scale(root, variable=progress_value, from_=0, to=0, orient="horizontal", command=seek)
+# progress_slider.bind("<ButtonRelease-1>", seek)
+progress_slider.pack(side="left", fill="x", expand=True)
+
+end_time = tk.Label(root, text=str(datetime.timedelta(seconds=0)))
+end_time.pack(side="left")
+
+vid_player.bind("<<Duration>>", update_duration)
+vid_player.bind("<<SecondChanged>>", update_scale)
+vid_player.bind("<<Ended>>", video_ended )
+
+skip_plus_5sec = tk.Button(root, text="Skip +5 sec", command=lambda: skip(5))
+skip_plus_5sec.pack(side="left")
+
+root.mainloop()
