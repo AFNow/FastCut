@@ -1,95 +1,59 @@
+import sys
+import cv2
+from PyQt5.QtCore import Qt, QTimer
+from PyQt5.QtGui import QImage, QPixmap
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QVBoxLayout, QWidget
 
-import datetime
-import tkinter as tk
-from tkinter import filedialog
-from tkVideoPlayer import TkinterVideo
+class VideoPlayer(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Python Video Player")
+        self.setGeometry(100, 100, 800, 600)
 
+        self.central_widget = QWidget()
+        self.setCentralWidget(self.central_widget)
+        self.layout = QVBoxLayout(self.central_widget)
 
-def update_duration(event):
-    """ updates the duration after finding the duration """
-    duration = vid_player.video_info()["duration"]
-    end_time["text"] = str(datetime.timedelta(seconds=duration))
-    progress_slider["to"] = duration
+        self.video_label = QLabel()
+        self.layout.addWidget(self.video_label)
 
+        self.play_button = QPushButton("Play")
+        self.play_button.clicked.connect(self.play_video)
+        self.layout.addWidget(self.play_button)
 
-def update_scale(event):
-    """ updates the scale value """
-    progress_value.set(vid_player.current_duration())
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.update_frame)
 
+        self.video_path = "Downloads/30946_84357cc6034102ff.mp4"
+        self.cap = cv2.VideoCapture(self.video_path)
 
-def load_video():
-    """ loads the video """
-    file_path = filedialog.askopenfilename()
+    def play_video(self):
+        if not self.timer.isActive():
+            self.timer.start(33)  # ~30 fps
+            self.play_button.setText("Pause")
+        else:
+            self.timer.stop()
+            self.play_button.setText("Play")
 
-    if file_path:
-        vid_player.load(file_path)
+    def update_frame(self):
+        ret, frame = self.cap.read()
+        if ret:
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            h, w, ch = frame.shape
+            bytes_per_line = ch * w
+            qt_image = QImage(frame.data, w, h, bytes_per_line, QImage.Format_RGB888)
+            pixmap = QPixmap.fromImage(qt_image)
+            self.video_label.setPixmap(pixmap.scaled(self.video_label.size(), Qt.KeepAspectRatio))
+        else:
+            self.timer.stop()
+            self.play_button.setText("Play")
+            self.cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
 
-        progress_slider.config(to=0, from_=0)
-        play_pause_btn["text"] = "Play"
-        progress_value.set(0)
+    def closeEvent(self, event):
+        self.cap.release()
 
-
-def seek(value):
-    """ used to seek a specific timeframe """
-    vid_player.seek(int(value))
-
-
-def skip(value: int):
-    """ skip seconds """
-    vid_player.seek(int(progress_slider.get())+value)
-    progress_value.set(progress_slider.get() + value)
-
-
-def play_pause():
-    """ pauses and plays """
-    if vid_player.is_paused():
-        vid_player.play()
-        play_pause_btn["text"] = "Pause"
-
-    else:
-        vid_player.pause()
-        play_pause_btn["text"] = "Play"
-
-
-def video_ended(event):
-    """ handle video ended """
-    progress_slider.set(progress_slider["to"])
-    play_pause_btn["text"] = "Play"
-    progress_slider.set(0)
-
-
-root = tk.Tk()
-root.title("Tkinter media")
-
-load_btn = tk.Button(root, text="Load", command=load_video)
-load_btn.pack()
-
-vid_player = TkinterVideo(scaled=True, master=root)
-vid_player.pack(expand=True, fill="both")
-
-play_pause_btn = tk.Button(root, text="Play", command=play_pause)
-play_pause_btn.pack()
-
-skip_plus_5sec = tk.Button(root, text="Skip -5 sec", command=lambda: skip(-5))
-skip_plus_5sec.pack(side="left")
-
-start_time = tk.Label(root, text=str(datetime.timedelta(seconds=0)))
-start_time.pack(side="left")
-
-progress_value = tk.IntVar(root)
-
-progress_slider = tk.Scale(root, variable=progress_value, from_=0, to=0, orient="horizontal", command=seek)
-# progress_slider.bind("<ButtonRelease-1>", seek)
-progress_slider.pack(side="left", fill="x", expand=True)
-
-end_time = tk.Label(root, text=str(datetime.timedelta(seconds=0)))
-end_time.pack(side="left")
-
-vid_player.bind("<<Duration>>", update_duration)
-vid_player.bind("<<SecondChanged>>", update_scale)
-vid_player.bind("<<Ended>>", video_ended )
-
-skip_plus_5sec = tk.Button(root, text="Skip +5 sec", command=lambda: skip(5))
-skip_plus_5sec.pack(side="left")
-
-root.mainloop()
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    player = VideoPlayer()
+    player.show()
+    sys.exit(app.exec_())
