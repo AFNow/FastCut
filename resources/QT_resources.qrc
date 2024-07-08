@@ -1,8 +1,0 @@
-<RCC>
-  <qresource prefix="icons">
-    <file>QT_resources.qrc</file>
-    <file>close.svg</file>
-    <file>expand.svg</file>
-    <file>roll_down.svg</file>
-  </qresource>
-</RCC>
