@@ -16,6 +16,7 @@ class Fast_Cut_Mainwindow(QMainWindow):
         self.ui = Ui_Fast_Cut_Mainwindow()
         self.ui.setupUi(self)
         self.setWindowFlags(Qt.FramelessWindowHint) # The frameless window option
+    
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

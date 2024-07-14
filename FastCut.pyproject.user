@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 13.0.1, 2024-07-14T14:23:17. -->
+<!-- Written by QtCreator 13.0.1, 2024-07-14T14:47:40. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -151,7 +151,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">fast_cut_mainwindow.py</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration.G:/My Drive/Code/Pet-Projects/FastCut/fast_cut_mainwindow.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">G:/My Drive/Code/Pet-Projects/FastCut/fast_cut_mainwindow.py</value>
-    <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">false</value>
+    <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">true</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Script">G:\My Drive\Code\Pet-Projects\FastCut\fast_cut_mainwindow.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
