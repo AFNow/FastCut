@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/resources/icons">
+        <file>resources/icons/close.svg</file>
+        <file>resources/icons/download.svg</file>
+        <file>resources/icons/expand.svg</file>
+        <file>resources/icons/FastCut.ico</file>
+        <file>resources/icons/header.svg</file>
+        <file>resources/icons/open_file.svg</file>
+        <file>resources/icons/open_folder.svg</file>
+        <file>resources/icons/roll_down.svg</file>
+        <file>resources/icons/save_file.svg</file>
+        <file>resources/icons/search.svg</file>
+        <file>resources/icons/select_folder.svg</file>
+        <file>resources/icons/side_menu.svg</file>
+    </qresource>
+</RCC>
