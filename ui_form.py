@@ -36,8 +36,8 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.side_frame = QFrame(self.base_widget)
         self.side_frame.setObjectName(u"side_frame")
-        self.side_frame.setMinimumSize(QSize(250, 0))
-        self.side_frame.setMaximumSize(QSize(250, 16777215))
+        self.side_frame.setMinimumSize(QSize(0, 0))
+        self.side_frame.setMaximumSize(QSize(0, 16777215))
         self.side_frame.setFrameShape(QFrame.StyledPanel)
         self.side_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout = QVBoxLayout(self.side_frame)
@@ -92,7 +92,7 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.scrollArea.setAlignment(Qt.AlignRight|Qt.AlignTop|Qt.AlignTrailing)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 225, 570))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -74, 225, 570))
         self.scrollAreaWidgetContents.setContextMenuPolicy(Qt.NoContextMenu)
         self.scrollAreaWidgetContents.setLayoutDirection(Qt.LeftToRight)
         self.verticalLayout_2 = QVBoxLayout(self.scrollAreaWidgetContents)
@@ -102,8 +102,8 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.file_frame_1 = QFrame(self.scrollAreaWidgetContents)
         self.file_frame_1.setObjectName(u"file_frame_1")
-        self.file_frame_1.setMinimumSize(QSize(225, 135))
-        self.file_frame_1.setMaximumSize(QSize(225, 135))
+        self.file_frame_1.setMinimumSize(QSize(210, 135))
+        self.file_frame_1.setMaximumSize(QSize(210, 135))
         self.file_frame_1.setStyleSheet(u"border-radius: 16;\n"
 "background-color: rgb(100,100,100);")
         self.file_frame_1.setFrameShape(QFrame.StyledPanel)
@@ -132,8 +132,8 @@ class Ui_Fast_Cut_Mainwindow(object):
 
         self.file_frame_2 = QFrame(self.scrollAreaWidgetContents)
         self.file_frame_2.setObjectName(u"file_frame_2")
-        self.file_frame_2.setMinimumSize(QSize(225, 135))
-        self.file_frame_2.setMaximumSize(QSize(225, 135))
+        self.file_frame_2.setMinimumSize(QSize(210, 135))
+        self.file_frame_2.setMaximumSize(QSize(210, 135))
         self.file_frame_2.setStyleSheet(u"border-radius: 16;\n"
 "background-color: rgb(100,100,100);")
         self.file_frame_2.setFrameShape(QFrame.StyledPanel)
@@ -162,8 +162,8 @@ class Ui_Fast_Cut_Mainwindow(object):
 
         self.file_frame_3 = QFrame(self.scrollAreaWidgetContents)
         self.file_frame_3.setObjectName(u"file_frame_3")
-        self.file_frame_3.setMinimumSize(QSize(225, 135))
-        self.file_frame_3.setMaximumSize(QSize(225, 135))
+        self.file_frame_3.setMinimumSize(QSize(210, 135))
+        self.file_frame_3.setMaximumSize(QSize(210, 135))
         self.file_frame_3.setStyleSheet(u"border-radius: 16;\n"
 "background-color: rgb(100,100,100);")
         self.file_frame_3.setFrameShape(QFrame.StyledPanel)
@@ -192,8 +192,8 @@ class Ui_Fast_Cut_Mainwindow(object):
 
         self.file_frame_4 = QFrame(self.scrollAreaWidgetContents)
         self.file_frame_4.setObjectName(u"file_frame_4")
-        self.file_frame_4.setMinimumSize(QSize(225, 135))
-        self.file_frame_4.setMaximumSize(QSize(225, 135))
+        self.file_frame_4.setMinimumSize(QSize(210, 135))
+        self.file_frame_4.setMaximumSize(QSize(210, 135))
         self.file_frame_4.setStyleSheet(u"border-radius: 16;\n"
 "background-color: rgb(100,100,100);")
         self.file_frame_4.setFrameShape(QFrame.StyledPanel)
@@ -450,6 +450,9 @@ class Ui_Fast_Cut_Mainwindow(object):
 
         self.verticalLayout_3.addWidget(self.main_frame_bottom)
 
+        self.main_frame_content.raise_()
+        self.main_frame_bottom.raise_()
+        self.main_frame_header.raise_()
 
         self.horizontalLayout.addWidget(self.main_frame)
 

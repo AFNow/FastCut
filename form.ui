@@ -43,13 +43,13 @@
      <widget class="QFrame" name="side_frame">
       <property name="minimumSize">
        <size>
-        <width>250</width>
+        <width>0</width>
         <height>0</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>250</width>
+        <width>0</width>
         <height>16777215</height>
        </size>
       </property>
@@ -209,7 +209,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
+               <y>-74</y>
                <width>225</width>
                <height>570</height>
               </rect>
@@ -243,13 +243,13 @@
                <widget class="QFrame" name="file_frame_1">
                 <property name="minimumSize">
                  <size>
-                  <width>225</width>
+                  <width>210</width>
                   <height>135</height>
                  </size>
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>225</width>
+                  <width>210</width>
                   <height>135</height>
                  </size>
                 </property>
@@ -343,13 +343,13 @@ background-color: rgb(100,100,100);</string>
                <widget class="QFrame" name="file_frame_2">
                 <property name="minimumSize">
                  <size>
-                  <width>225</width>
+                  <width>210</width>
                   <height>135</height>
                  </size>
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>225</width>
+                  <width>210</width>
                   <height>135</height>
                  </size>
                 </property>
@@ -443,13 +443,13 @@ background-color: rgb(100,100,100);</string>
                <widget class="QFrame" name="file_frame_3">
                 <property name="minimumSize">
                  <size>
-                  <width>225</width>
+                  <width>210</width>
                   <height>135</height>
                  </size>
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>225</width>
+                  <width>210</width>
                   <height>135</height>
                  </size>
                 </property>
@@ -543,13 +543,13 @@ background-color: rgb(100,100,100);</string>
                <widget class="QFrame" name="file_frame_4">
                 <property name="minimumSize">
                  <size>
-                  <width>225</width>
+                  <width>210</width>
                   <height>135</height>
                  </size>
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>225</width>
+                  <width>210</width>
                   <height>135</height>
                  </size>
                 </property>
@@ -1192,6 +1192,9 @@ border: 2px solid white;</string>
         </widget>
        </item>
       </layout>
+      <zorder>main_frame_content</zorder>
+      <zorder>main_frame_bottom</zorder>
+      <zorder>main_frame_header</zorder>
      </widget>
     </item>
    </layout>
