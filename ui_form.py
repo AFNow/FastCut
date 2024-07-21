@@ -92,7 +92,7 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.scrollArea.setAlignment(Qt.AlignRight|Qt.AlignTop|Qt.AlignTrailing)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, -74, 225, 570))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 210, 570))
         self.scrollAreaWidgetContents.setContextMenuPolicy(Qt.NoContextMenu)
         self.scrollAreaWidgetContents.setLayoutDirection(Qt.LeftToRight)
         self.verticalLayout_2 = QVBoxLayout(self.scrollAreaWidgetContents)
@@ -320,13 +320,13 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.main_frame.setFrameShape(QFrame.StyledPanel)
         self.main_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_3 = QVBoxLayout(self.main_frame)
-        self.verticalLayout_3.setSpacing(0)
+        self.verticalLayout_3.setSpacing(5)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.main_frame_header = QFrame(self.main_frame)
         self.main_frame_header.setObjectName(u"main_frame_header")
-        self.main_frame_header.setMinimumSize(QSize(0, 50))
-        self.main_frame_header.setMaximumSize(QSize(16777215, 50))
+        self.main_frame_header.setMinimumSize(QSize(0, 30))
+        self.main_frame_header.setMaximumSize(QSize(16777215, 30))
         self.main_frame_header.setStyleSheet(u"background-color: rgb(0, 4, 31)")
         self.main_frame_header.setFrameShape(QFrame.StyledPanel)
         self.main_frame_header.setFrameShadow(QFrame.Raised)
@@ -341,7 +341,9 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.main_frame_header_side_call.setFrameShape(QFrame.StyledPanel)
         self.main_frame_header_side_call.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_9 = QHBoxLayout(self.main_frame_header_side_call)
+        self.horizontalLayout_9.setSpacing(0)
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
         self.call_side_frame_button = QPushButton(self.main_frame_header_side_call)
         self.call_side_frame_button.setObjectName(u"call_side_frame_button")
         self.call_side_frame_button.setMinimumSize(QSize(30, 30))
@@ -349,42 +351,29 @@ class Ui_Fast_Cut_Mainwindow(object):
         icon5 = QIcon()
         icon5.addFile(u":/resources/icons/resources/icons/side_menu.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.call_side_frame_button.setIcon(icon5)
-        self.call_side_frame_button.setIconSize(QSize(30, 30))
+        self.call_side_frame_button.setIconSize(QSize(20, 20))
         self.call_side_frame_button.setFlat(True)
 
         self.horizontalLayout_9.addWidget(self.call_side_frame_button)
 
+        self.call_dropdown_frame_button = QPushButton(self.main_frame_header_side_call)
+        self.call_dropdown_frame_button.setObjectName(u"call_dropdown_frame_button")
+
+        self.horizontalLayout_9.addWidget(self.call_dropdown_frame_button)
+
 
         self.horizontalLayout_7.addWidget(self.main_frame_header_side_call)
 
-        self.search_frame = QFrame(self.main_frame_header)
-        self.search_frame.setObjectName(u"search_frame")
-        self.search_frame.setFrameShape(QFrame.StyledPanel)
-        self.search_frame.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_10 = QHBoxLayout(self.search_frame)
+        self.header_spacing = QFrame(self.main_frame_header)
+        self.header_spacing.setObjectName(u"header_spacing")
+        self.header_spacing.setFrameShape(QFrame.StyledPanel)
+        self.header_spacing.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_10 = QHBoxLayout(self.header_spacing)
+        self.horizontalLayout_10.setSpacing(10)
         self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
-        self.link_line_edit = QLineEdit(self.search_frame)
-        self.link_line_edit.setObjectName(u"link_line_edit")
-        self.link_line_edit.setStyleSheet(u"border-radius:5;\n"
-"background-color:rgb(0,0,0);\n"
-"border: 2px solid white;")
+        self.horizontalLayout_10.setContentsMargins(0, 0, 0, 0)
 
-        self.horizontalLayout_10.addWidget(self.link_line_edit)
-
-        self.downloa_button = QPushButton(self.search_frame)
-        self.downloa_button.setObjectName(u"downloa_button")
-        self.downloa_button.setMinimumSize(QSize(30, 30))
-        self.downloa_button.setMaximumSize(QSize(30, 30))
-        icon6 = QIcon()
-        icon6.addFile(u":/resources/icons/resources/icons/download.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.downloa_button.setIcon(icon6)
-        self.downloa_button.setIconSize(QSize(30, 30))
-        self.downloa_button.setFlat(True)
-
-        self.horizontalLayout_10.addWidget(self.downloa_button)
-
-
-        self.horizontalLayout_7.addWidget(self.search_frame)
+        self.horizontalLayout_7.addWidget(self.header_spacing)
 
         self.window_operators_frame = QFrame(self.main_frame_header)
         self.window_operators_frame.setObjectName(u"window_operators_frame")
@@ -393,15 +382,17 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.window_operators_frame.setFrameShape(QFrame.StyledPanel)
         self.window_operators_frame.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_8 = QHBoxLayout(self.window_operators_frame)
+        self.horizontalLayout_8.setSpacing(0)
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
         self.roll_button = QPushButton(self.window_operators_frame)
         self.roll_button.setObjectName(u"roll_button")
         self.roll_button.setMinimumSize(QSize(30, 30))
         self.roll_button.setMaximumSize(QSize(30, 30))
-        icon7 = QIcon()
-        icon7.addFile(u":/resources/icons/resources/icons/roll_down.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.roll_button.setIcon(icon7)
-        self.roll_button.setIconSize(QSize(25, 30))
+        icon6 = QIcon()
+        icon6.addFile(u":/resources/icons/resources/icons/roll_down.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.roll_button.setIcon(icon6)
+        self.roll_button.setIconSize(QSize(20, 20))
         self.roll_button.setFlat(True)
 
         self.horizontalLayout_8.addWidget(self.roll_button)
@@ -410,10 +401,10 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.expand_button.setObjectName(u"expand_button")
         self.expand_button.setMinimumSize(QSize(30, 30))
         self.expand_button.setMaximumSize(QSize(30, 30))
-        icon8 = QIcon()
-        icon8.addFile(u":/resources/icons/resources/icons/expand.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.expand_button.setIcon(icon8)
-        self.expand_button.setIconSize(QSize(25, 30))
+        icon7 = QIcon()
+        icon7.addFile(u":/resources/icons/resources/icons/expand.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.expand_button.setIcon(icon7)
+        self.expand_button.setIconSize(QSize(20, 20))
         self.expand_button.setFlat(True)
 
         self.horizontalLayout_8.addWidget(self.expand_button)
@@ -422,10 +413,10 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.close_button.setObjectName(u"close_button")
         self.close_button.setMinimumSize(QSize(30, 30))
         self.close_button.setMaximumSize(QSize(30, 30))
-        icon9 = QIcon()
-        icon9.addFile(u":/resources/icons/resources/icons/close.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.close_button.setIcon(icon9)
-        self.close_button.setIconSize(QSize(25, 30))
+        icon8 = QIcon()
+        icon8.addFile(u":/resources/icons/resources/icons/close.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.close_button.setIcon(icon8)
+        self.close_button.setIconSize(QSize(20, 20))
         self.close_button.setFlat(True)
 
         self.horizontalLayout_8.addWidget(self.close_button)
@@ -435,6 +426,39 @@ class Ui_Fast_Cut_Mainwindow(object):
 
 
         self.verticalLayout_3.addWidget(self.main_frame_header)
+
+        self.dropdown_frame = QFrame(self.main_frame)
+        self.dropdown_frame.setObjectName(u"dropdown_frame")
+        self.dropdown_frame.setMinimumSize(QSize(0, 0))
+        self.dropdown_frame.setMaximumSize(QSize(16777215, 0))
+        self.dropdown_frame.setFrameShape(QFrame.StyledPanel)
+        self.dropdown_frame.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_11 = QHBoxLayout(self.dropdown_frame)
+        self.horizontalLayout_11.setSpacing(10)
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.horizontalLayout_11.setContentsMargins(45, 3, 145, 3)
+        self.link_line_edit = QLineEdit(self.dropdown_frame)
+        self.link_line_edit.setObjectName(u"link_line_edit")
+        self.link_line_edit.setStyleSheet(u"border-radius:5;\n"
+"background-color:rgb(0,0,0);\n"
+"border: 2px solid white;")
+
+        self.horizontalLayout_11.addWidget(self.link_line_edit)
+
+        self.downloa_button = QPushButton(self.dropdown_frame)
+        self.downloa_button.setObjectName(u"downloa_button")
+        self.downloa_button.setMinimumSize(QSize(30, 30))
+        self.downloa_button.setMaximumSize(QSize(30, 30))
+        icon9 = QIcon()
+        icon9.addFile(u":/resources/icons/resources/icons/download.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.downloa_button.setIcon(icon9)
+        self.downloa_button.setIconSize(QSize(30, 30))
+        self.downloa_button.setFlat(True)
+
+        self.horizontalLayout_11.addWidget(self.downloa_button)
+
+
+        self.verticalLayout_3.addWidget(self.dropdown_frame)
 
         self.main_frame_content = QFrame(self.main_frame)
         self.main_frame_content.setObjectName(u"main_frame_content")
@@ -450,9 +474,10 @@ class Ui_Fast_Cut_Mainwindow(object):
 
         self.verticalLayout_3.addWidget(self.main_frame_bottom)
 
-        self.main_frame_content.raise_()
+        self.dropdown_frame.raise_()
         self.main_frame_bottom.raise_()
         self.main_frame_header.raise_()
+        self.main_frame_content.raise_()
 
         self.horizontalLayout.addWidget(self.main_frame)
 
@@ -475,9 +500,10 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.open_folder_button.setText("")
         self.set_folder_button.setText("")
         self.call_side_frame_button.setText("")
-        self.downloa_button.setText("")
+        self.call_dropdown_frame_button.setText("")
         self.roll_button.setText("")
         self.expand_button.setText("")
         self.close_button.setText("")
+        self.downloa_button.setText("")
     # retranslateUi
 

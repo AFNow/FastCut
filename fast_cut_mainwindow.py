@@ -41,6 +41,8 @@ class Fast_Cut_Mainwindow(QMainWindow):
 
         self.ui.call_side_frame_button.clicked.connect(lambda: self.left_frame_event())
 
+        self.ui.call_dropdown_frame_button.clicked.connect(lambda: self.dropdown_frame_event())
+
 
     def maximize_minimize(self):
         if self.isMaximized():
@@ -59,22 +61,39 @@ class Fast_Cut_Mainwindow(QMainWindow):
 
 
     def left_frame_event(self):
-        width = self.ui.side_frame.width()
-        if width == 0:
-            ex_width = 250
+        left_frame_width = self.ui.side_frame.width()
+        if left_frame_width == 0:
+            left_frame_end_width = 250
             #self.ui.call_side_frame_button.setIcon(#new icon address)
         else:
-            ex_width = 0
+            left_frame_end_width = 0
             #self.ui.call_side_frame_button.setIcon(#old icon address)
 
 
         self.animation = QPropertyAnimation(self.ui.side_frame, b"maximumWidth")
         self.animation.setDuration(300)
-        self.animation.setStartValue(width)
-        self.animation.setEndValue(ex_width)
+        self.animation.setStartValue(left_frame_width)
+        self.animation.setEndValue(left_frame_end_width)
         self.animation.setEasingCurve(QEasingCurve.InOutQuart)
         self.animation.start()
 
+
+    def dropdown_frame_event(self):
+        dropdown_frame_height = self.ui.dropdown_frame.height()
+        if dropdown_frame_height == 0:
+            dropdown_frame_end_height = 40
+            #self.ui.call_side_frame_button.setIcon(#new icon address)
+        else:
+            dropdown_frame_end_height = 0
+            #self.ui.call_side_frame_button.setIcon(#old icon address)
+
+
+        self.animation = QPropertyAnimation(self.ui.dropdown_frame, b"maximumHeight")
+        self.animation.setDuration(300)
+        self.animation.setStartValue(dropdown_frame_height)
+        self.animation.setEndValue(dropdown_frame_end_height)
+        self.animation.setEasingCurve(QEasingCurve.InOutQuart)
+        self.animation.start()
 
     def mouse_press_events(self, event):
         self.clickPosition = event.globalPos()
