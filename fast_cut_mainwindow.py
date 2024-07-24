@@ -21,6 +21,9 @@ class Fast_Cut_Mainwindow(QMainWindow):
         self.ui.setupUi(self)
         self.setWindowFlags(Qt.FramelessWindowHint) # The frameless window option
         self.setAttribute(Qt.WA_TranslucentBackground) # The translucent background option
+        self.ui.main_frame_header.mousePressEvent = self.mousePressEvent # Mouse press event for the window dragging
+        self.ui.main_frame_header.mouseMoveEvent = self.mouseMoveEvent # Mouse move event for the window dragging
+
 
         self.shadow = QGraphicsDropShadowEffect(self) # The shadow effect and its parameters
         self.shadow.setBlurRadius(50)
@@ -35,31 +38,23 @@ class Fast_Cut_Mainwindow(QMainWindow):
 
         #QSizeGrip(self.ui.grip) # The window size grip
 
-        self.ui.close_button.clicked.connect(lambda: self.close())
+        # Buttons connectors:
+        self.ui.close_button.clicked.connect(lambda: self.close()) 
         self.ui.expand_button.clicked.connect(lambda: self.maximize_minimize())
         self.ui.roll_button.clicked.connect(lambda: self.showMinimized())
 
+        #Side frame and dropdown connectors
         self.ui.call_side_frame_button.clicked.connect(lambda: self.left_frame_event())
-
         self.ui.call_dropdown_frame_button.clicked.connect(lambda: self.dropdown_frame_event())
 
-
+    # Window size button function 
     def maximize_minimize(self):
         if self.isMaximized():
             self.showNormal()
         else:
             self.showMaximized()
 
-
-    def move_window(self, e):
-        if self.isMaximized() == False:
-            if e.buttons() == Qt.LeftButton:
-                self.move(self.pos() + e.globalPos() - self.clickPosition)
-                self.dragPos = e.globalPos()
-                e.accept()
-        self.ui.main_frame_header.mouseMoveEvent = self.move_window
-
-
+    # The side frame event 
     def left_frame_event(self):
         left_frame_width = self.ui.side_frame.width()
         if left_frame_width == 0:
@@ -69,7 +64,7 @@ class Fast_Cut_Mainwindow(QMainWindow):
             left_frame_end_width = 0
             #self.ui.call_side_frame_button.setIcon(#old icon address)
 
-
+        #Left frame animation parameters
         self.animation = QPropertyAnimation(self.ui.side_frame, b"maximumWidth")
         self.animation.setDuration(300)
         self.animation.setStartValue(left_frame_width)
@@ -77,7 +72,18 @@ class Fast_Cut_Mainwindow(QMainWindow):
         self.animation.setEasingCurve(QEasingCurve.InOutQuart)
         self.animation.start()
 
+    #Events for the mouse click and mouse move
+    def mousePressEvent(self, event):
+        if event.button() == Qt.LeftButton:
+            self.clickPosition = event.globalPos() - self.frameGeometry().topLeft()
+            event.accept()
 
+    def mouseMoveEvent(self, event):
+        if event.buttons() == Qt.LeftButton:
+            self.move(event.globalPos() - self.clickPosition)
+            event.accept()
+
+    # Dropdown frame event
     def dropdown_frame_event(self):
         dropdown_frame_height = self.ui.dropdown_frame.height()
         if dropdown_frame_height == 0:
@@ -87,7 +93,7 @@ class Fast_Cut_Mainwindow(QMainWindow):
             dropdown_frame_end_height = 0
             #self.ui.call_side_frame_button.setIcon(#old icon address)
 
-
+        #Dropdown frame animation parameters
         self.animation = QPropertyAnimation(self.ui.dropdown_frame, b"maximumHeight")
         self.animation.setDuration(300)
         self.animation.setStartValue(dropdown_frame_height)
@@ -95,8 +101,6 @@ class Fast_Cut_Mainwindow(QMainWindow):
         self.animation.setEasingCurve(QEasingCurve.InOutQuart)
         self.animation.start()
 
-    def mouse_press_events(self, event):
-        self.clickPosition = event.globalPos()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
