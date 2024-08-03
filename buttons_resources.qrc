@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/mainwindow_buttons">
+        <file>resources/icons/close.svg</file>
+        <file>resources/icons/expand.svg</file>
+        <file>resources/icons/roll_down.svg</file>
+    </qresource>
+    <qresource prefix="/dropdown_manu">
+        <file>resources/icons/dropdown1.svg</file>
+        <file>resources/icons/dropdown2.svg</file>
+    </qresource>
+    <qresource prefix="/sidemenu_caller">
+        <file>resources/icons/sidemenu1.svg</file>
+        <file>resources/icons/sidemenu2.svg</file>
+    </qresource>
+    <qresource prefix="/sidemenu_buttons">
+        <file>resources/icons/open_file.svg</file>
+        <file>resources/icons/open_folder.svg</file>
+        <file>resources/icons/select_folder.svg</file>
+        <file>resources/icons/save_file.svg</file>
+        <file>resources/icons/header.svg</file>
+    </qresource>
+    <qresource prefix="/new/prefix1"/>
+</RCC>

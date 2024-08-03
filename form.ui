@@ -132,8 +132,8 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
-              <normaloff>:/resources/icons/resources/icons/header.svg</normaloff>:/resources/icons/resources/icons/header.svg</iconset>
+             <iconset resource="buttons_resources.qrc">
+              <normaloff>:/sidemenu_buttons/resources/icons/header.svg</normaloff>:/sidemenu_buttons/resources/icons/header.svg</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -727,8 +727,8 @@ background-color: rgb(100,100,100);</string>
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="resources.qrc">
-                 <normaloff>:/resources/icons/resources/icons/open_file.svg</normaloff>:/resources/icons/resources/icons/open_file.svg</iconset>
+                <iconset resource="buttons_resources.qrc">
+                 <normaloff>:/sidemenu_buttons/resources/icons/open_file.svg</normaloff>:/sidemenu_buttons/resources/icons/open_file.svg</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -759,8 +759,8 @@ background-color: rgb(100,100,100);</string>
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="resources.qrc">
-                 <normaloff>:/resources/icons/resources/icons/save_file.svg</normaloff>:/resources/icons/resources/icons/save_file.svg</iconset>
+                <iconset resource="buttons_resources.qrc">
+                 <normaloff>:/sidemenu_buttons/resources/icons/save_file.svg</normaloff>:/sidemenu_buttons/resources/icons/save_file.svg</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -818,8 +818,8 @@ background-color: rgb(100,100,100);</string>
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="resources.qrc">
-                 <normaloff>:/resources/icons/resources/icons/open_folder.svg</normaloff>:/resources/icons/resources/icons/open_folder.svg</iconset>
+                <iconset resource="buttons_resources.qrc">
+                 <normaloff>:/sidemenu_buttons/resources/icons/open_folder.svg</normaloff>:/sidemenu_buttons/resources/icons/open_folder.svg</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -850,8 +850,8 @@ background-color: rgb(100,100,100);</string>
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="resources.qrc">
-                 <normaloff>:/resources/icons/resources/icons/select_folder.svg</normaloff>:/resources/icons/resources/icons/select_folder.svg</iconset>
+                <iconset resource="buttons_resources.qrc">
+                 <normaloff>:/sidemenu_buttons/resources/icons/select_folder.svg</normaloff>:/sidemenu_buttons/resources/icons/select_folder.svg</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -979,22 +979,22 @@ background-color: rgb(100,100,100);</string>
               <widget class="QPushButton" name="call_side_frame_button">
                <property name="minimumSize">
                 <size>
-                 <width>30</width>
-                 <height>30</height>
+                 <width>25</width>
+                 <height>25</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>30</width>
-                 <height>30</height>
+                 <width>25</width>
+                 <height>25</height>
                 </size>
                </property>
                <property name="text">
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="resources.qrc">
-                 <normaloff>:/resources/icons/resources/icons/side_menu.svg</normaloff>:/resources/icons/resources/icons/side_menu.svg</iconset>
+                <iconset resource="buttons_resources.qrc">
+                 <normaloff>:/sidemenu_caller/resources/icons/sidemenu2.svg</normaloff>:/sidemenu_caller/resources/icons/sidemenu2.svg</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -1009,8 +1009,33 @@ background-color: rgb(100,100,100);</string>
              </item>
              <item>
               <widget class="QPushButton" name="call_dropdown_frame_button">
+               <property name="minimumSize">
+                <size>
+                 <width>25</width>
+                 <height>26</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>25</width>
+                 <height>25</height>
+                </size>
+               </property>
                <property name="text">
                 <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="buttons_resources.qrc">
+                 <normaloff>:/dropdown_manu/resources/icons/dropdown2.svg</normaloff>:/dropdown_manu/resources/icons/dropdown2.svg</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>20</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -1098,8 +1123,8 @@ background-color: rgb(100,100,100);</string>
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="resources.qrc">
-                 <normaloff>:/resources/icons/resources/icons/roll_down.svg</normaloff>:/resources/icons/resources/icons/roll_down.svg</iconset>
+                <iconset resource="buttons_resources.qrc">
+                 <normaloff>:/mainwindow_buttons/resources/icons/roll_down.svg</normaloff>:/mainwindow_buttons/resources/icons/roll_down.svg</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -1130,8 +1155,8 @@ background-color: rgb(100,100,100);</string>
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="resources.qrc">
-                 <normaloff>:/resources/icons/resources/icons/expand.svg</normaloff>:/resources/icons/resources/icons/expand.svg</iconset>
+                <iconset resource="buttons_resources.qrc">
+                 <normaloff>:/mainwindow_buttons/resources/icons/expand.svg</normaloff>:/mainwindow_buttons/resources/icons/expand.svg</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -1162,8 +1187,8 @@ background-color: rgb(100,100,100);</string>
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="resources.qrc">
-                 <normaloff>:/resources/icons/resources/icons/close.svg</normaloff>:/resources/icons/resources/icons/close.svg</iconset>
+                <iconset resource="buttons_resources.qrc">
+                 <normaloff>:/mainwindow_buttons/resources/icons/close.svg</normaloff>:/mainwindow_buttons/resources/icons/close.svg</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -1245,7 +1270,7 @@ border: 2px solid white;</string>
              <string/>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset>
               <normaloff>:/resources/icons/resources/icons/download.svg</normaloff>:/resources/icons/resources/icons/download.svg</iconset>
             </property>
             <property name="iconSize">
@@ -1293,7 +1318,7 @@ border: 2px solid white;</string>
   </widget>
  </widget>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="buttons_resources.qrc"/>
  </resources>
  <connections/>
 </ui>

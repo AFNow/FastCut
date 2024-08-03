@@ -19,7 +19,7 @@ from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QFrame, QHBoxL
     QLabel, QLayout, QLineEdit, QMainWindow,
     QPushButton, QScrollArea, QSizePolicy, QVBoxLayout,
     QWidget)
-import rc_resources
+import rc_buttons_resources
 
 class Ui_Fast_Cut_Mainwindow(object):
     def setupUi(self, Fast_Cut_Mainwindow):
@@ -60,7 +60,7 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.link_button.setMinimumSize(QSize(0, 50))
         self.link_button.setMaximumSize(QSize(16777215, 50))
         icon = QIcon()
-        icon.addFile(u":/resources/icons/resources/icons/header.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon.addFile(u":/sidemenu_buttons/resources/icons/header.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.link_button.setIcon(icon)
         self.link_button.setIconSize(QSize(120, 40))
         self.link_button.setFlat(True)
@@ -251,7 +251,7 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.open_file_button.setMinimumSize(QSize(30, 30))
         self.open_file_button.setMaximumSize(QSize(30, 30))
         icon1 = QIcon()
-        icon1.addFile(u":/resources/icons/resources/icons/open_file.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon1.addFile(u":/sidemenu_buttons/resources/icons/open_file.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.open_file_button.setIcon(icon1)
         self.open_file_button.setIconSize(QSize(30, 30))
         self.open_file_button.setFlat(True)
@@ -263,7 +263,7 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.save_file_button.setMinimumSize(QSize(30, 30))
         self.save_file_button.setMaximumSize(QSize(30, 30))
         icon2 = QIcon()
-        icon2.addFile(u":/resources/icons/resources/icons/save_file.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon2.addFile(u":/sidemenu_buttons/resources/icons/save_file.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.save_file_button.setIcon(icon2)
         self.save_file_button.setIconSize(QSize(30, 30))
         self.save_file_button.setFlat(True)
@@ -286,7 +286,7 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.open_folder_button.setMinimumSize(QSize(30, 30))
         self.open_folder_button.setMaximumSize(QSize(30, 30))
         icon3 = QIcon()
-        icon3.addFile(u":/resources/icons/resources/icons/open_folder.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon3.addFile(u":/sidemenu_buttons/resources/icons/open_folder.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.open_folder_button.setIcon(icon3)
         self.open_folder_button.setIconSize(QSize(30, 30))
         self.open_folder_button.setFlat(True)
@@ -298,7 +298,7 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.set_folder_button.setMinimumSize(QSize(30, 30))
         self.set_folder_button.setMaximumSize(QSize(30, 30))
         icon4 = QIcon()
-        icon4.addFile(u":/resources/icons/resources/icons/select_folder.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon4.addFile(u":/sidemenu_buttons/resources/icons/select_folder.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.set_folder_button.setIcon(icon4)
         self.set_folder_button.setIconSize(QSize(30, 30))
         self.set_folder_button.setFlat(True)
@@ -346,10 +346,10 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
         self.call_side_frame_button = QPushButton(self.main_frame_header_side_call)
         self.call_side_frame_button.setObjectName(u"call_side_frame_button")
-        self.call_side_frame_button.setMinimumSize(QSize(30, 30))
-        self.call_side_frame_button.setMaximumSize(QSize(30, 30))
+        self.call_side_frame_button.setMinimumSize(QSize(25, 25))
+        self.call_side_frame_button.setMaximumSize(QSize(25, 25))
         icon5 = QIcon()
-        icon5.addFile(u":/resources/icons/resources/icons/side_menu.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon5.addFile(u":/sidemenu_caller/resources/icons/sidemenu2.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.call_side_frame_button.setIcon(icon5)
         self.call_side_frame_button.setIconSize(QSize(20, 20))
         self.call_side_frame_button.setFlat(True)
@@ -358,9 +358,13 @@ class Ui_Fast_Cut_Mainwindow(object):
 
         self.call_dropdown_frame_button = QPushButton(self.main_frame_header_side_call)
         self.call_dropdown_frame_button.setObjectName(u"call_dropdown_frame_button")
-        self.call_dropdown_frame_button.setMinimumSize(QSize(30, 30))
-        self.call_dropdown_frame_button.setMaximumSize(QSize(30, 30))
-
+        self.call_dropdown_frame_button.setMinimumSize(QSize(25, 26))
+        self.call_dropdown_frame_button.setMaximumSize(QSize(25, 25))
+        icon6 = QIcon()
+        icon6.addFile(u":/dropdown_manu/resources/icons/dropdown2.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.call_dropdown_frame_button.setIcon(icon6)
+        self.call_dropdown_frame_button.setIconSize(QSize(20, 20))
+        self.call_dropdown_frame_button.setFlat(True)
 
         self.horizontalLayout_9.addWidget(self.call_dropdown_frame_button)
 
@@ -392,9 +396,9 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.roll_button.setObjectName(u"roll_button")
         self.roll_button.setMinimumSize(QSize(30, 30))
         self.roll_button.setMaximumSize(QSize(30, 30))
-        icon6 = QIcon()
-        icon6.addFile(u":/resources/icons/resources/icons/roll_down.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.roll_button.setIcon(icon6)
+        icon7 = QIcon()
+        icon7.addFile(u":/mainwindow_buttons/resources/icons/roll_down.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.roll_button.setIcon(icon7)
         self.roll_button.setIconSize(QSize(20, 20))
         self.roll_button.setFlat(True)
 
@@ -404,9 +408,9 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.expand_button.setObjectName(u"expand_button")
         self.expand_button.setMinimumSize(QSize(30, 30))
         self.expand_button.setMaximumSize(QSize(30, 30))
-        icon7 = QIcon()
-        icon7.addFile(u":/resources/icons/resources/icons/expand.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.expand_button.setIcon(icon7)
+        icon8 = QIcon()
+        icon8.addFile(u":/mainwindow_buttons/resources/icons/expand.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.expand_button.setIcon(icon8)
         self.expand_button.setIconSize(QSize(20, 20))
         self.expand_button.setFlat(True)
 
@@ -416,9 +420,9 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.close_button.setObjectName(u"close_button")
         self.close_button.setMinimumSize(QSize(30, 30))
         self.close_button.setMaximumSize(QSize(30, 30))
-        icon8 = QIcon()
-        icon8.addFile(u":/resources/icons/resources/icons/close.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.close_button.setIcon(icon8)
+        icon9 = QIcon()
+        icon9.addFile(u":/mainwindow_buttons/resources/icons/close.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.close_button.setIcon(icon9)
         self.close_button.setIconSize(QSize(20, 20))
         self.close_button.setFlat(True)
 
@@ -452,9 +456,9 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.downloa_button.setObjectName(u"downloa_button")
         self.downloa_button.setMinimumSize(QSize(30, 30))
         self.downloa_button.setMaximumSize(QSize(30, 30))
-        icon9 = QIcon()
-        icon9.addFile(u":/resources/icons/resources/icons/download.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.downloa_button.setIcon(icon9)
+        icon10 = QIcon()
+        icon10.addFile(u":/resources/icons/resources/icons/download.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.downloa_button.setIcon(icon10)
         self.downloa_button.setIconSize(QSize(30, 30))
         self.downloa_button.setFlat(True)
 
@@ -490,7 +494,6 @@ class Ui_Fast_Cut_Mainwindow(object):
 
         QMetaObject.connectSlotsByName(Fast_Cut_Mainwindow)
     # setupUi
-
 
     def retranslateUi(self, Fast_Cut_Mainwindow):
         Fast_Cut_Mainwindow.setWindowTitle(QCoreApplication.translate("Fast_Cut_Mainwindow", u"Fast_Cut_Mainwindow", None))

@@ -1,7 +1,7 @@
 {
     "files": [
+        "buttons_resources.qrc",
         "fast_cut_mainwindow.py",
-        "form.ui",
-        "resources.qrc"
+        "form.ui"
     ]
 }

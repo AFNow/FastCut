@@ -2,7 +2,7 @@
 import sys
 
 from PySide6.QtWidgets import QApplication, QMainWindow
-from PySide6.QtCore import Qt, QPropertyAnimation, QEasingCurve
+from PySide6.QtCore import Qt, QPropertyAnimation, QEasingCurve, QSize
 from PySide6 import QtGui
 from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout, QApplication, QSizeGrip
 from PySide6.QtWidgets import QGraphicsDropShadowEffect
@@ -59,10 +59,14 @@ class Fast_Cut_Mainwindow(QMainWindow):
         left_frame_width = self.ui.side_frame.width()
         if left_frame_width == 0:
             left_frame_end_width = 250
-            #self.ui.call_side_frame_button.setIcon(#new icon address)
+            icon11 = QIcon() # Assigning the non-default icon's state
+            icon11.addFile(u":/sidemenu_caller/resources/icons/sidemenu1.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            self.ui.call_side_frame_button.setIcon(icon11)
         else:
             left_frame_end_width = 0
-            #self.ui.call_side_frame_button.setIcon(#old icon address)
+            icon5 = QIcon() # Assigning the default icon's state back
+            icon5.addFile(u":/sidemenu_caller/resources/icons/sidemenu2.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            self.ui.call_side_frame_button.setIcon(icon5)
 
         #Left frame animation parameters
         self.animation = QPropertyAnimation(self.ui.side_frame, b"maximumWidth")
@@ -88,10 +92,14 @@ class Fast_Cut_Mainwindow(QMainWindow):
         dropdown_frame_height = self.ui.dropdown_frame.height()
         if dropdown_frame_height == 0:
             dropdown_frame_end_height = 40
-            #self.ui.call_side_frame_button.setIcon(#new icon address)
+            icon12 = QIcon() # Assigning the non-default icon's state
+            icon12.addFile(u":/dropdown_manu/resources/icons/dropdown1.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            self.ui.call_dropdown_frame_button.setIcon(icon12)
         else:
             dropdown_frame_end_height = 0
-            #self.ui.call_side_frame_button.setIcon(#old icon address)
+            icon6 = QIcon() # Assigning the non-default icon's state
+            icon6.addFile(u":/dropdown_manu/resources/icons/dropdown2.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            self.ui.call_dropdown_frame_button.setIcon(icon6)
 
         #Dropdown frame animation parameters
         self.animation = QPropertyAnimation(self.ui.dropdown_frame, b"maximumHeight")
