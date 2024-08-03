@@ -1,18 +1,21 @@
 # This Python file uses the following encoding: utf-8
 import sys
+import os
 
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QLabel, QVBoxLayout, QApplication, QSizeGrip, QGraphicsDropShadowEffect, QFileDialog, QTextEdit
 from PySide6.QtCore import Qt, QPropertyAnimation, QEasingCurve, QSize
 from PySide6 import QtGui
-from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout, QApplication, QSizeGrip
-from PySide6.QtWidgets import QGraphicsDropShadowEffect
-from PySide6.QtGui import QColor, QIcon
+from PySide6.QtGui import QColor, QIcon, QFileOpenEvent
 
 # Important:
 # You need to run the following command to generate the ui_form.py file
 #     pyside6-uic form.ui -o ui_form.py, or
 #     pyside2-uic form.ui -o ui_form.py
 from ui_form import Ui_Fast_Cut_Mainwindow
+
+# Default path address
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+default_path = BASE_DIR
 
 class Fast_Cut_Mainwindow(QMainWindow):
     def __init__(self, parent=None):
@@ -38,7 +41,7 @@ class Fast_Cut_Mainwindow(QMainWindow):
 
         #QSizeGrip(self.ui.grip) # The window size grip
 
-        # Buttons connectors:
+        # Mainwindow buttons connectors:
         self.ui.close_button.clicked.connect(lambda: self.close()) 
         self.ui.expand_button.clicked.connect(lambda: self.maximize_minimize())
         self.ui.roll_button.clicked.connect(lambda: self.showMinimized())
@@ -47,12 +50,20 @@ class Fast_Cut_Mainwindow(QMainWindow):
         self.ui.call_side_frame_button.clicked.connect(lambda: self.left_frame_event())
         self.ui.call_dropdown_frame_button.clicked.connect(lambda: self.dropdown_frame_event())
 
+        #Connectors to the buttons inside side frame 
+        self.ui.set_folder_button.clicked.connect(lambda: self.select_path())
+
+        #Connectors to the buttons inside dropdown frame
+        self.ui.download_button.clicked.connect(lambda: self.check_link())
+
+
     # Window size button function 
     def maximize_minimize(self):
         if self.isMaximized():
             self.showNormal()
         else:
             self.showMaximized()
+
 
     # The side frame event 
     def left_frame_event(self):
@@ -67,7 +78,6 @@ class Fast_Cut_Mainwindow(QMainWindow):
             icon5 = QIcon() # Assigning the default icon's state back
             icon5.addFile(u":/sidemenu_caller/resources/icons/sidemenu2.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
             self.ui.call_side_frame_button.setIcon(icon5)
-
         #Left frame animation parameters
         self.animation = QPropertyAnimation(self.ui.side_frame, b"maximumWidth")
         self.animation.setDuration(300)
@@ -75,17 +85,25 @@ class Fast_Cut_Mainwindow(QMainWindow):
         self.animation.setEndValue(left_frame_end_width)
         self.animation.setEasingCurve(QEasingCurve.InOutQuart)
         self.animation.start()
+   
+    # Function to select the default path
+    def select_path(self):
+        global default_path
+        dialog = QFileDialog()
+        default_path = dialog.getExistingDirectory(None, "Select Folder")
+        return default_path
 
-    #Events for the mouse click and mouse move
+
+    # Events for the mouse click and mouse move
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
             self.clickPosition = event.globalPos() - self.frameGeometry().topLeft()
             event.accept()
-
     def mouseMoveEvent(self, event):
         if event.buttons() == Qt.LeftButton:
             self.move(event.globalPos() - self.clickPosition)
             event.accept()
+
 
     # Dropdown frame event
     def dropdown_frame_event(self):
@@ -93,14 +111,13 @@ class Fast_Cut_Mainwindow(QMainWindow):
         if dropdown_frame_height == 0:
             dropdown_frame_end_height = 40
             icon12 = QIcon() # Assigning the non-default icon's state
-            icon12.addFile(u":/dropdown_manu/resources/icons/dropdown1.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            icon12.addFile(u":/dropdown_menu/resources/icons/dropdown1.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
             self.ui.call_dropdown_frame_button.setIcon(icon12)
         else:
             dropdown_frame_end_height = 0
             icon6 = QIcon() # Assigning the non-default icon's state
-            icon6.addFile(u":/dropdown_manu/resources/icons/dropdown2.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            icon6.addFile(u":/dropdown_menu/resources/icons/dropdown2.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
             self.ui.call_dropdown_frame_button.setIcon(icon6)
-
         #Dropdown frame animation parameters
         self.animation = QPropertyAnimation(self.ui.dropdown_frame, b"maximumHeight")
         self.animation.setDuration(300)
@@ -108,6 +125,28 @@ class Fast_Cut_Mainwindow(QMainWindow):
         self.animation.setEndValue(dropdown_frame_end_height)
         self.animation.setEasingCurve(QEasingCurve.InOutQuart)
         self.animation.start()
+
+    # Dropdown menu functions
+    def check_link(self):
+        link_text = self.ui.link_line_edit.text()
+        print(link_text)
+        pass
+
+    # Link checking function for call a video title
+#def link_check():
+#    link = link_entry.get()
+#    if link != "":
+#        try:
+#            yt = pytube.YouTube(link, on_progress_callback = None)
+#            video_title = yt.title
+#            video_title_label.configure(text = video_title)
+#        except pytube.exceptions.RegexMatchError:
+#            video_title_label.configure(text = "Wrog link")
+# Threading for link checking
+#def link_check_thread(event):
+#    thread = Thread(target = link_check, daemon = True)
+#    thread.start()
+#    return thread
 
 
 if __name__ == "__main__":

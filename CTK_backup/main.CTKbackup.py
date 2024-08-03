@@ -19,27 +19,6 @@ folder_icon_path = os.path.join(BASE_DIR, 'resources/folder_icon.png')
 download_icon_path = os.path.join(BASE_DIR, 'resources/download_icon.png')
 save_path = BASE_DIR
 
-# Default path settings
-def set_default_path():
-    global save_path
-    save_path = askdirectory(title='Select a place to save', initialdir=BASE_DIR)
-    print(save_path)
-
-# Main Window settings
-Fast_Cut = customtkinter.CTk()
-Fast_Cut.resizable(width=True, height=True)
-Fast_Cut.title('FastCut')
-rootHeight = 900
-rootWidth = 1500
-Fast_Cut.minsize(rootWidth, rootHeight)
-Fast_Cut.maxsize(1920, 1080)
-
-# Theme settings
-customtkinter.set_appearance_mode('dark') 
-Fast_Cut.iconbitmap(icon_path)
-normal_font = customtkinter.CTkFont(family=font_path, size=16, weight='normal')
-bold_font = customtkinter.CTkFont(family=font_path, size=16, weight='bold')
-
 
 # Link checking function for call a video title
 def link_check():

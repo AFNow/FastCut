@@ -4,9 +4,10 @@
         <file>resources/icons/expand.svg</file>
         <file>resources/icons/roll_down.svg</file>
     </qresource>
-    <qresource prefix="/dropdown_manu">
+    <qresource prefix="/dropdown_menu">
         <file>resources/icons/dropdown1.svg</file>
         <file>resources/icons/dropdown2.svg</file>
+        <file>resources/icons/download.svg</file>
     </qresource>
     <qresource prefix="/sidemenu_caller">
         <file>resources/icons/sidemenu1.svg</file>

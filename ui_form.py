@@ -361,7 +361,7 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.call_dropdown_frame_button.setMinimumSize(QSize(25, 26))
         self.call_dropdown_frame_button.setMaximumSize(QSize(25, 25))
         icon6 = QIcon()
-        icon6.addFile(u":/dropdown_manu/resources/icons/dropdown2.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon6.addFile(u":/dropdown_menu/resources/icons/dropdown2.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.call_dropdown_frame_button.setIcon(icon6)
         self.call_dropdown_frame_button.setIconSize(QSize(20, 20))
         self.call_dropdown_frame_button.setFlat(True)
@@ -452,17 +452,17 @@ class Ui_Fast_Cut_Mainwindow(object):
 
         self.horizontalLayout_11.addWidget(self.link_line_edit)
 
-        self.downloa_button = QPushButton(self.dropdown_frame)
-        self.downloa_button.setObjectName(u"downloa_button")
-        self.downloa_button.setMinimumSize(QSize(30, 30))
-        self.downloa_button.setMaximumSize(QSize(30, 30))
+        self.download_button = QPushButton(self.dropdown_frame)
+        self.download_button.setObjectName(u"download_button")
+        self.download_button.setMinimumSize(QSize(30, 30))
+        self.download_button.setMaximumSize(QSize(30, 30))
         icon10 = QIcon()
-        icon10.addFile(u":/resources/icons/resources/icons/download.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.downloa_button.setIcon(icon10)
-        self.downloa_button.setIconSize(QSize(30, 30))
-        self.downloa_button.setFlat(True)
+        icon10.addFile(u":/dropdown_menu/resources/icons/download.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.download_button.setIcon(icon10)
+        self.download_button.setIconSize(QSize(25, 25))
+        self.download_button.setFlat(True)
 
-        self.horizontalLayout_11.addWidget(self.downloa_button)
+        self.horizontalLayout_11.addWidget(self.download_button)
 
 
         self.verticalLayout_3.addWidget(self.dropdown_frame)
@@ -511,6 +511,6 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.roll_button.setText("")
         self.expand_button.setText("")
         self.close_button.setText("")
-        self.downloa_button.setText("")
+        self.download_button.setText("")
     # retranslateUi
 
