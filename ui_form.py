@@ -15,10 +15,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtOpenGLWidgets import QOpenGLWidget
 from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QFrame, QHBoxLayout,
     QLabel, QLayout, QLineEdit, QMainWindow,
-    QPushButton, QScrollArea, QSizePolicy, QVBoxLayout,
-    QWidget)
+    QProgressBar, QPushButton, QScrollArea, QSizePolicy,
+    QVBoxLayout, QWidget)
 import rc_buttons_resources
 
 class Ui_Fast_Cut_Mainwindow(object):
@@ -26,6 +27,7 @@ class Ui_Fast_Cut_Mainwindow(object):
         if not Fast_Cut_Mainwindow.objectName():
             Fast_Cut_Mainwindow.setObjectName(u"Fast_Cut_Mainwindow")
         Fast_Cut_Mainwindow.resize(1200, 600)
+        Fast_Cut_Mainwindow.setLayoutDirection(Qt.LeftToRight)
         self.base_widget = QWidget(Fast_Cut_Mainwindow)
         self.base_widget.setObjectName(u"base_widget")
         self.base_widget.setMinimumSize(QSize(1200, 600))
@@ -320,7 +322,7 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.main_frame.setFrameShape(QFrame.StyledPanel)
         self.main_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_3 = QVBoxLayout(self.main_frame)
-        self.verticalLayout_3.setSpacing(5)
+        self.verticalLayout_3.setSpacing(0)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.main_frame_header = QFrame(self.main_frame)
@@ -389,9 +391,9 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.window_operators_frame.setFrameShape(QFrame.StyledPanel)
         self.window_operators_frame.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_8 = QHBoxLayout(self.window_operators_frame)
-        self.horizontalLayout_8.setSpacing(0)
+        self.horizontalLayout_8.setSpacing(10)
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
-        self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_8.setContentsMargins(20, 0, 0, 0)
         self.roll_button = QPushButton(self.window_operators_frame)
         self.roll_button.setObjectName(u"roll_button")
         self.roll_button.setMinimumSize(QSize(30, 30))
@@ -446,9 +448,88 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.horizontalLayout_11.setContentsMargins(45, 3, 145, 3)
         self.link_line_edit = QLineEdit(self.dropdown_frame)
         self.link_line_edit.setObjectName(u"link_line_edit")
+        palette = QPalette()
+        brush = QBrush(QColor(255, 255, 255, 255))
+        brush.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Active, QPalette.WindowText, brush)
+        brush1 = QBrush(QColor(0, 0, 0, 255))
+        brush1.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Active, QPalette.Button, brush1)
+        palette.setBrush(QPalette.Active, QPalette.Light, brush1)
+        palette.setBrush(QPalette.Active, QPalette.Midlight, brush1)
+        palette.setBrush(QPalette.Active, QPalette.Dark, brush1)
+        palette.setBrush(QPalette.Active, QPalette.Mid, brush1)
+        palette.setBrush(QPalette.Active, QPalette.Text, brush)
+        palette.setBrush(QPalette.Active, QPalette.BrightText, brush)
+        palette.setBrush(QPalette.Active, QPalette.ButtonText, brush)
+        palette.setBrush(QPalette.Active, QPalette.Base, brush1)
+        palette.setBrush(QPalette.Active, QPalette.Window, brush1)
+        palette.setBrush(QPalette.Active, QPalette.Shadow, brush1)
+        palette.setBrush(QPalette.Active, QPalette.AlternateBase, brush1)
+        brush2 = QBrush(QColor(255, 255, 220, 255))
+        brush2.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Active, QPalette.ToolTipBase, brush2)
+        palette.setBrush(QPalette.Active, QPalette.ToolTipText, brush1)
+        brush3 = QBrush(QColor(255, 255, 255, 127))
+        brush3.setStyle(Qt.SolidPattern)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette.Active, QPalette.PlaceholderText, brush3)
+#endif
+        palette.setBrush(QPalette.Active, QPalette.Accent, brush1)
+        palette.setBrush(QPalette.Inactive, QPalette.WindowText, brush)
+        palette.setBrush(QPalette.Inactive, QPalette.Button, brush1)
+        palette.setBrush(QPalette.Inactive, QPalette.Light, brush1)
+        palette.setBrush(QPalette.Inactive, QPalette.Midlight, brush1)
+        palette.setBrush(QPalette.Inactive, QPalette.Dark, brush1)
+        palette.setBrush(QPalette.Inactive, QPalette.Mid, brush1)
+        palette.setBrush(QPalette.Inactive, QPalette.Text, brush)
+        palette.setBrush(QPalette.Inactive, QPalette.BrightText, brush)
+        palette.setBrush(QPalette.Inactive, QPalette.ButtonText, brush)
+        palette.setBrush(QPalette.Inactive, QPalette.Base, brush1)
+        palette.setBrush(QPalette.Inactive, QPalette.Window, brush1)
+        palette.setBrush(QPalette.Inactive, QPalette.Shadow, brush1)
+        palette.setBrush(QPalette.Inactive, QPalette.AlternateBase, brush1)
+        palette.setBrush(QPalette.Inactive, QPalette.ToolTipBase, brush2)
+        palette.setBrush(QPalette.Inactive, QPalette.ToolTipText, brush1)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush3)
+#endif
+        palette.setBrush(QPalette.Inactive, QPalette.Accent, brush1)
+        palette.setBrush(QPalette.Disabled, QPalette.WindowText, brush1)
+        palette.setBrush(QPalette.Disabled, QPalette.Button, brush1)
+        palette.setBrush(QPalette.Disabled, QPalette.Light, brush1)
+        palette.setBrush(QPalette.Disabled, QPalette.Midlight, brush1)
+        palette.setBrush(QPalette.Disabled, QPalette.Dark, brush1)
+        palette.setBrush(QPalette.Disabled, QPalette.Mid, brush1)
+        palette.setBrush(QPalette.Disabled, QPalette.Text, brush1)
+        palette.setBrush(QPalette.Disabled, QPalette.BrightText, brush)
+        palette.setBrush(QPalette.Disabled, QPalette.ButtonText, brush1)
+        palette.setBrush(QPalette.Disabled, QPalette.Base, brush1)
+        palette.setBrush(QPalette.Disabled, QPalette.Window, brush1)
+        palette.setBrush(QPalette.Disabled, QPalette.Shadow, brush1)
+        palette.setBrush(QPalette.Disabled, QPalette.AlternateBase, brush1)
+        palette.setBrush(QPalette.Disabled, QPalette.ToolTipBase, brush2)
+        palette.setBrush(QPalette.Disabled, QPalette.ToolTipText, brush1)
+        brush4 = QBrush(QColor(0, 0, 0, 127))
+        brush4.setStyle(Qt.SolidPattern)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush4)
+#endif
+        palette.setBrush(QPalette.Disabled, QPalette.Accent, brush1)
+        self.link_line_edit.setPalette(palette)
+        font = QFont()
+        font.setPointSize(9)
+        font.setUnderline(True)
+        self.link_line_edit.setFont(font)
+        self.link_line_edit.setLayoutDirection(Qt.RightToLeft)
+        self.link_line_edit.setAutoFillBackground(False)
         self.link_line_edit.setStyleSheet(u"border-radius:5;\n"
-"background-color:rgb(0,0,0);\n"
-"border: 2px solid white;")
+"background-color:rgb(0, 0, 0);\n"
+"border: 2px solid white;\n"
+"color: rgb(255, 255, 255)")
+        self.link_line_edit.setMaxLength(100)
+        self.link_line_edit.setFrame(False)
+        self.link_line_edit.setCursorPosition(0)
 
         self.horizontalLayout_11.addWidget(self.link_line_edit)
 
@@ -471,18 +552,137 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.main_frame_content.setObjectName(u"main_frame_content")
         self.main_frame_content.setFrameShape(QFrame.StyledPanel)
         self.main_frame_content.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_4 = QVBoxLayout(self.main_frame_content)
+        self.verticalLayout_4.setSpacing(0)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.player_frame = QFrame(self.main_frame_content)
+        self.player_frame.setObjectName(u"player_frame")
+        self.player_frame.setFrameShape(QFrame.StyledPanel)
+        self.player_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_5 = QVBoxLayout(self.player_frame)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.openGLWidget = QOpenGLWidget(self.player_frame)
+        self.openGLWidget.setObjectName(u"openGLWidget")
+
+        self.verticalLayout_5.addWidget(self.openGLWidget)
+
+
+        self.verticalLayout_4.addWidget(self.player_frame)
+
+        self.dialog_frame = QFrame(self.main_frame_content)
+        self.dialog_frame.setObjectName(u"dialog_frame")
+        self.dialog_frame.setFrameShape(QFrame.StyledPanel)
+        self.dialog_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_6 = QVBoxLayout(self.dialog_frame)
+        self.verticalLayout_6.setSpacing(0)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.operatoins_frame = QFrame(self.dialog_frame)
+        self.operatoins_frame.setObjectName(u"operatoins_frame")
+        self.operatoins_frame.setFrameShape(QFrame.StyledPanel)
+        self.operatoins_frame.setFrameShadow(QFrame.Raised)
+
+        self.verticalLayout_6.addWidget(self.operatoins_frame)
+
+        self.status_frame = QFrame(self.dialog_frame)
+        self.status_frame.setObjectName(u"status_frame")
+        self.status_frame.setMinimumSize(QSize(0, 20))
+        self.status_frame.setMaximumSize(QSize(16777215, 20))
+        self.status_frame.setFrameShape(QFrame.StyledPanel)
+        self.status_frame.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_12 = QHBoxLayout(self.status_frame)
+        self.horizontalLayout_12.setSpacing(0)
+        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
+        self.horizontalLayout_12.setContentsMargins(0, 0, 0, 0)
+        self.name_frame = QFrame(self.status_frame)
+        self.name_frame.setObjectName(u"name_frame")
+        self.name_frame.setFrameShape(QFrame.StyledPanel)
+        self.name_frame.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_13 = QHBoxLayout(self.name_frame)
+        self.horizontalLayout_13.setSpacing(0)
+        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
+        self.horizontalLayout_13.setContentsMargins(20, 0, 20, 0)
+        self.name_label = QLabel(self.name_frame)
+        self.name_label.setObjectName(u"name_label")
+        self.name_label.setMinimumSize(QSize(500, 0))
+        self.name_label.setMaximumSize(QSize(300, 16777215))
+        self.name_label.setStyleSheet(u"color: white;\n"
+"")
+
+        self.horizontalLayout_13.addWidget(self.name_label)
+
+
+        self.horizontalLayout_12.addWidget(self.name_frame)
+
+        self.status_bar_frame = QFrame(self.status_frame)
+        self.status_bar_frame.setObjectName(u"status_bar_frame")
+        self.status_bar_frame.setFrameShape(QFrame.StyledPanel)
+        self.status_bar_frame.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_14 = QHBoxLayout(self.status_bar_frame)
+        self.horizontalLayout_14.setSpacing(0)
+        self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
+        self.horizontalLayout_14.setContentsMargins(20, 0, 20, 0)
+        self.progressBar = QProgressBar(self.status_bar_frame)
+        self.progressBar.setObjectName(u"progressBar")
+        self.progressBar.setMinimumSize(QSize(0, 0))
+        self.progressBar.setMaximumSize(QSize(16777215, 15))
+        self.progressBar.setToolTipDuration(0)
+        self.progressBar.setStyleSheet(u"QProgressBar {\n"
+"     border: 1px solid white;\n"
+"     border-radius: 5px;\n"
+"     background-color: rgb(0, 0, 0);\n"
+" }\n"
+"\n"
+" QProgressBar::chunk {\n"
+"     background-color: white;\n"
+" }")
+        self.progressBar.setValue(0)
+        self.progressBar.setTextVisible(False)
+        self.progressBar.setOrientation(Qt.Horizontal)
+
+        self.horizontalLayout_14.addWidget(self.progressBar)
+
+
+        self.horizontalLayout_12.addWidget(self.status_bar_frame)
+
+        self.status_message_frame = QFrame(self.status_frame)
+        self.status_message_frame.setObjectName(u"status_message_frame")
+        self.status_message_frame.setMinimumSize(QSize(200, 0))
+        self.status_message_frame.setMaximumSize(QSize(200, 16777215))
+        self.status_message_frame.setFrameShape(QFrame.StyledPanel)
+        self.status_message_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_7 = QVBoxLayout(self.status_message_frame)
+        self.verticalLayout_7.setSpacing(0)
+        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+        self.verticalLayout_7.setContentsMargins(20, 0, 20, 0)
+        self.status_label = QLabel(self.status_message_frame)
+        self.status_label.setObjectName(u"status_label")
+        self.status_label.setStyleSheet(u"color: white;")
+
+        self.verticalLayout_7.addWidget(self.status_label)
+
+
+        self.horizontalLayout_12.addWidget(self.status_message_frame, 0, Qt.AlignLeft|Qt.AlignTop)
+
+        self.grip_frame = QFrame(self.status_frame)
+        self.grip_frame.setObjectName(u"grip_frame")
+        self.grip_frame.setMinimumSize(QSize(15, 15))
+        self.grip_frame.setFrameShape(QFrame.StyledPanel)
+        self.grip_frame.setFrameShadow(QFrame.Raised)
+
+        self.horizontalLayout_12.addWidget(self.grip_frame, 0, Qt.AlignRight|Qt.AlignBottom)
+
+
+        self.verticalLayout_6.addWidget(self.status_frame)
+
+
+        self.verticalLayout_4.addWidget(self.dialog_frame)
+
 
         self.verticalLayout_3.addWidget(self.main_frame_content)
 
-        self.main_frame_bottom = QFrame(self.main_frame)
-        self.main_frame_bottom.setObjectName(u"main_frame_bottom")
-        self.main_frame_bottom.setFrameShape(QFrame.StyledPanel)
-        self.main_frame_bottom.setFrameShadow(QFrame.Raised)
-
-        self.verticalLayout_3.addWidget(self.main_frame_bottom)
-
         self.dropdown_frame.raise_()
-        self.main_frame_bottom.raise_()
         self.main_frame_header.raise_()
         self.main_frame_content.raise_()
 
@@ -512,5 +712,7 @@ class Ui_Fast_Cut_Mainwindow(object):
         self.expand_button.setText("")
         self.close_button.setText("")
         self.download_button.setText("")
+        self.name_label.setText("")
+        self.status_label.setText("")
     # retranslateUi
 

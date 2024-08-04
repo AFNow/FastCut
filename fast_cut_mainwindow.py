@@ -10,7 +10,9 @@ from PySide6.QtCore import Qt, QPropertyAnimation, QEasingCurve, QSize
 from PySide6 import QtGui
 from PySide6.QtGui import QColor, QIcon, QFileOpenEvent
 
-import pytube
+#import pytube
+from pytubefix import YouTube
+from pytubefix.cli import on_progress
 import pytube.exceptions
 
 # Important:
@@ -45,7 +47,7 @@ class Fast_Cut_Mainwindow(QMainWindow):
 
         self.setWindowTitle("Fast_Cut") # The window title
 
-        #QSizeGrip(self.ui.grip) # The window size grip
+        QSizeGrip(self.ui.grip_frame) # The window size grip
 
         # Mainwindow buttons connectors:
         self.ui.close_button.clicked.connect(lambda: self.close()) 
@@ -61,6 +63,7 @@ class Fast_Cut_Mainwindow(QMainWindow):
 
         #Connectors to the buttons inside dropdown frame
         self.ui.link_line_edit.textChanged.connect(lambda: self.check_link())
+        self.ui.download_button.clicked.connect(lambda: self.download_button(default_path))
 
 
     # Window size button function 
@@ -139,17 +142,60 @@ class Fast_Cut_Mainwindow(QMainWindow):
             try:
                 yt_link = pytube.YouTube(link_text, on_complete_callback= None)
                 video_title = yt_link.author + ' - ' + yt_link.title
-                print(video_title)
-                # Label text assignment <-----------------------
+                self.ui.name_label.setText(video_title)
             except pytube.exceptions.RegexMatchError:
-                # Label Error text assgnment <-----------------------
-                print('Error')
-                pass
+                self.ui.name_label.setText('Wrong link!')
     
     def link_check_threading(self, event):
         thread = Thread(target = self.check_link, daemon = True)
         thread.start()
         return thread
+
+
+# Progress bar function
+    def progress_bar(self, stream, chunk, bytes_remaining):
+        """Callback function"""
+        total_size = stream.filesize
+        bytes_downloaded = total_size - bytes_remaining
+        pct_completed = bytes_downloaded / total_size * 100
+        
+        self.ui.progressBar.setValue((round(pct_completed))/100)
+        print(f"Status: {round(pct_completed)} %")
+
+
+    # Download function
+    def download(self,default_path):
+        url = self.ui.link_line_edit.text()
+        self.ui.link_line_edit.clear()
+        yt = YouTube(url, on_progress_callback=self.progress_bar)
+                            # use_oauth=True,                                     # use_oauth=True if you want to use OAuth
+                            # allow_oauth_cache=None                              # allow_oauth_cache=True if you want to use OAuth
+        # pytube's cipher.py might need the regex formula editing
+        '''
+        r'a\.[a-zA-Z]\s*&&\s*\([a-z]\s*=\s*a\.get\("n"\)\)\s*&&.*\|\|\s*([a-z]+)',
+        r'\([a-z]\s*=\s*([a-zA-Z0-9$]+)(\[\d+\])\([a-z]\)'
+        '''
+        out = yt.streams\
+            .filter(progressive=True, file_extension='mp4')\
+            .order_by('resolution')\
+            .desc()\
+            .first()\
+            .download(default_path)
+        self.ui.status_label.setText('Download is completed')
+    
+    def download_thread(self, default_path):
+        thread = Thread(target = self.download, args=(default_path,), daemon = True)
+        thread.start()
+        return thread
+
+    def download_button(self, default_path):
+        if default_path != "":
+            try:
+                self.download_thread(default_path)
+            except:
+                self.ui.status_label.setText('Something went wrong')
+        else:
+            self.ui.status_label.setText('The saving path is None')
 
 
 if __name__ == "__main__":
